@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import US1099TaxCalculatorApp from '../../components/US1099TaxCalculatorApp';
+import { ALL_US_STATES } from '../../data/usStatesTaxData';
+
+export async function getStaticPaths() {
+  return ALL_US_STATES.map((s) => ({
+    params: { state: s.stateName.toLowerCase().replace(/\s+/g, '-') },
+    props: { stateData: s },
+  }));
+}
+
+const { stateData } = Astro.props;
+
+const pageTitle = `${stateData.stateName} 1099 Freelance Tax Calculator 2026 | GlobalTaxCalc`;
+const pageDescription = `Calculate 1099 self-employment tax (SECA), federal income tax, and ${stateData.stateName} state income tax for independent contractors and LLCs.`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: '1099 Tax Calculator', url: '/1099-tax-calculator' },
+    { name: stateData.stateName, url: `/1099-tax/${stateData.stateName.toLowerCase().replace(/\s+/g, '-')}` },
+  ]}
+>
+  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-emerald-700 dark:text-emerald-300">
+      <span>🇺🇸 {stateData.stateName} Self-Employment & Income Tax</span>
+      <span>•</span>
+      <span>{stateData.taxType === 'NONE' ? '0% State Tax' : stateData.taxType}</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
+      {stateData.stateName} <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">1099 Tax Calculator</span>
+    </h1>
+
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Accurately calculate net freelance earnings, 15.3% SECA self-employment tax, federal income tax, and {stateData.stateName} state tax brackets with quarterly payment schedules.
+    </p>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 pb-14">
+    <US1099TaxCalculatorApp
+      client:load
+      initialStateCode={stateData.stateCode}
+      initialRevenue={100000}
+    />
+  </section>
+
+  {/* State Specific Tax Rules */}
+  <section class="max-w-4xl mx-auto px-4 py-10 border-t border-slate-200 dark:border-slate-800 space-y-6">
+    <div class="bg-white dark:bg-[#151D2A] p-6 sm:p-7 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+      <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+        <span>🏛️</span>
+        <span>{stateData.stateName} Individual Tax Structure</span>
+      </h3>
+
+      <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+        <p>
+          <strong>State Tax Type:</strong> {stateData.taxType === 'NONE' ? 'Zero personal earned income tax.' : `${stateData.taxType} system.`}
+        </p>
+        <p>
+          <strong>Standard Deduction:</strong> ${stateData.standardDeduction.single.toLocaleString()} (Single) / ${stateData.standardDeduction.married.toLocaleString()} (Married Joint).
+        </p>
+        {stateData.notes && (
+          <p class="text-amber-600 dark:text-amber-400">
+            <strong>State Notes:</strong> {stateData.notes}
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

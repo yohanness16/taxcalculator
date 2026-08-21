@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FireInvestmentApp from '../components/FireInvestmentApp';
+
+const fireFaqs = [
+  {
+    question: 'What is the 4% Safe Withdrawal Rate (SWR) rule in FIRE?',
+    answer: 'The 4% rule, originating from the Trinity Study, posits that an investor can withdraw 4% of their initial portfolio value in the first year of retirement (adjusted for inflation each year thereafter) with a 95%+ probability of their portfolio lasting at least 30 years in a balanced stock/bond allocation.',
+  },
+  {
+    question: 'What is the difference between Lean FIRE, FIRE, and Fat FIRE?',
+    answer: 'Lean FIRE targets covering bare-bones essential living expenses (~75% of baseline), standard FIRE covers current comfortable living expenses (25x annual spending), and Fat FIRE provides a luxurious retirement lifestyle (150%+ of baseline spending).',
+  },
+  {
+    question: 'How does Systematic Investment Planning (SIP) / Dollar-Cost Averaging (DCA) work?',
+    answer: 'SIP/DCA involves investing a fixed sum of money at regular monthly intervals regardless of market fluctuations. Over long time horizons, compound interest and market expansion generate exponential capital growth.',
+  },
+];
+---
+
+<Layout
+  title="FIRE Retirement & Compound Interest SIP Calculator 2026 | GlobalTaxCalc"
+  description="Model your Financial Independence, Retire Early (FIRE) number with the 4% Safe Withdrawal Rate, simulate compound growth, and project your years to retirement."
+  faqs={fireFaqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'FIRE Calculator', url: '/fire-calculator' },
+  ]}
+>
+  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+    <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-indigo-700 dark:text-indigo-300">
+      <span>🔥 Financial Independence, Retire Early (FIRE) Engine</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
+      FIRE Retirement & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-indigo-600">Compound Growth Calculator</span>
+    </h1>
+
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Determine your exact FIRE target number, calculate years until retirement based on savings rate, and model long-term compound wealth accumulation.
+    </p>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 pb-14">
+    <FireInvestmentApp client:load />
+  </section>
+</Layout>

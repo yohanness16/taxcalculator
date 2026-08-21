@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import US1099TaxCalculatorApp from '../components/US1099TaxCalculatorApp';
+import { ALL_US_STATES } from '../data/usStatesTaxData';
+
+const usTaxFaqs = [
+  {
+    question: 'What is the Self-Employment Tax (SECA) rate in 2026?',
+    answer: 'The federal self-employment tax rate is 15.3%, consisting of 12.4% for Social Security (on net earnings up to $176,100 in 2026) and 2.9% for Medicare (uncapped). An additional 0.9% Medicare surtax applies on self-employment income exceeding $200,000 for single filers ($250,000 for married couples).',
+  },
+  {
+    question: 'How do 1099 independent contractors calculate net taxable profit?',
+    answer: '1099 contractors report gross revenue and subtract allowable ordinary and necessary business expenses on IRS Schedule C. Self-employment tax applies to 92.35% of this net Schedule C profit.',
+  },
+  {
+    question: 'What are the IRS Form 1040-ES quarterly estimated tax payment due dates?',
+    answer: 'Quarterly estimated taxes are due in four installments: Q1 (April 15), Q2 (June 15), Q3 (September 15), and Q4 (January 15 of the following year). Paying quarterly prevents IRS underpayment interest penalties.',
+  },
+  {
+    question: 'What is the 50% above-the-line deduction for self-employment tax?',
+    answer: 'The IRS allows self-employed individuals to deduct 50% of their total SECA tax (the employer-equivalent half) directly from gross income before calculating Adjusted Gross Income (AGI).',
+  },
+];
+---
+
+<Layout
+  title="1099 Freelance & Self-Employment Tax Calculator 2026 | GlobalTaxCalc"
+  description="Calculate federal income tax, 15.3% SECA self-employment tax, state tax, and quarterly estimated IRS payment deadlines across all 50 US states. Free with zero tracking."
+  faqs={usTaxFaqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: '1099 Tax Calculator', url: '/1099-tax-calculator' },
+  ]}
+>
+  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+    <div class="inline-flex items-center space-x-2 bg-amber-50 dark:bg-amber-950/70 border border-amber-200 dark:border-amber-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-amber-700 dark:text-amber-300">
+      <span>🇺🇸 IRS Schedule C & Schedule SE 2026 Mechanics</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
+      1099 Freelance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-emerald-600">Self-Employment Tax Calculator</span>
+    </h1>
+
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Accurately estimate 15.3% SECA self-employment taxes, federal progressive brackets, state tax liabilities, and Form 1040-ES quarterly deadlines for sole proprietors, LLC owners, and independent contractors.
+    </p>
+
+    {/* State Quick Links */}
+    <div class="flex flex-wrap items-center justify-center gap-1.5 pt-2">
+      <span class="text-xs font-bold text-slate-400 mr-1">Popular States:</span>
+      {ALL_US_STATES.slice(0, 10).map((s) => (
+        <a
+          href={`/1099-tax/${s.stateName.toLowerCase().replace(/\s+/g, '-')}`}
+          class="text-xs font-bold px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:border-emerald-500 transition"
+        >
+          {s.stateName}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 pb-14">
+    <US1099TaxCalculatorApp client:load initialStateCode="CA" initialRevenue={100000} />
+  </section>
+
+  {/* Educational Section for AdSense Valuable Content */}
+  <section class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+        Understanding Self-Employment Tax & Schedule C Deductions
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
+        Key tax strategies, write-offs, and compliance steps for independent contractors and LLCs.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+          <span>🧾</span>
+          <span>Maximize Schedule C Write-Offs</span>
+        </h3>
+        <p class="leading-relaxed">
+          Every dollar in ordinary business expenses (mileage, home office, software subscriptions, equipment depreciation) directly reduces both income tax and the 15.3% SECA tax.
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+          <span>📅</span>
+          <span>Quarterly Safe Harbor Rule</span>
+        </h3>
+        <p class="leading-relaxed">
+          To avoid underpayment penalties, pay either 90% of your current year tax liability or 100% (110% for high earners) of your prior year tax liability across the 4 quarterly deadlines.
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
+        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+          <span>🏛️</span>
+          <span>Section 199A QBI Deduction</span>
+        </h3>
+        <p class="leading-relaxed">
+          Eligible pass-through business entities and sole proprietors may deduct up to 20% of their qualified business income (QBI), substantially reducing effective federal taxable rates.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

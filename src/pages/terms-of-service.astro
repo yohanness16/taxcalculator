@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Terms of Service | GlobalTaxCalc"
+  description="Terms of Service and Conditions of Use for GlobalTaxCalc financial calculator platform."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Terms of Service', url: '/terms-of-service' },
+  ]}
+>
+  <div class="max-w-4xl mx-auto px-4 py-12 space-y-8 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+    <div class="space-y-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+      <h1 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white">
+        Terms of Service
+      </h1>
+      <p class="text-xs text-slate-400">Last updated: January 1, 2026</p>
+    </div>
+
+    <section class="space-y-3">
+      <h2 class="text-base font-bold text-slate-900 dark:text-white">1. Acceptance of Terms</h2>
+      <p>
+        By accessing or using GlobalTaxCalc, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+      </p>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-base font-bold text-slate-900 dark:text-white">2. Educational & Illustrative Scope</h2>
+      <p>
+        The tools, calculators, tax rates, and results provided on this website are intended solely for general informational and educational planning purposes. They do not constitute certified tax, legal, accounting, or professional financial advice.
+      </p>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-base font-bold text-slate-900 dark:text-white">3. Limitation of Liability</h2>
+      <p>
+        Under no circumstances shall GlobalTaxCalc or its contributors be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the tools or materials provided on this platform.
+      </p>
+    </section>
+  </div>
+</Layout>

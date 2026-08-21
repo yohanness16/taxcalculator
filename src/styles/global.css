@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    @apply bg-[#F8FAFC] text-slate-900 dark:bg-[#0B0F17] dark:text-slate-100 antialiased min-h-screen selection:bg-emerald-500 selection:text-white transition-colors duration-200;
+  }
+}
+
+/* Zero Cumulative Layout Shift (CLS) Ad Slot Container Standards */
+.ad-slot-leaderboard {
+  min-height: 90px;
+  width: 100%;
+  contain: layout size;
+}
+
+.ad-slot-sidebar {
+  min-height: 600px;
+  width: 100%;
+  contain: layout size;
+}
+
+.ad-slot-rectangle {
+  min-height: 250px;
+  width: 100%;
+  contain: layout size;
+}
+
+.ad-slot-mobile-anchor {
+  min-height: 50px;
+  width: 100%;
+  contain: layout size;
+}
+
+/* Custom Scrollbar for schedules & tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}

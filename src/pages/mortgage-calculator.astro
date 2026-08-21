@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MortgageCalculatorApp from '../components/MortgageCalculatorApp';
+
+const mortgageFaqs = [
+  {
+    question: 'What is PITI in a mortgage calculation?',
+    answer: 'PITI stands for Principal, Interest, Taxes, and Insurance. It represents the comprehensive total monthly housing cost paid by a homeowner.',
+  },
+  {
+    question: 'When is Private Mortgage Insurance (PMI) removed from a loan?',
+    answer: 'Under the Homeowners Protection Act, PMI is automatically cancelled when your loan balance reaches 78% of the original home purchase value, or you can request cancellation once you reach 80% Loan-to-Value (LTV).',
+  },
+  {
+    question: 'How do extra monthly principal payments accelerate loan payoff?',
+    answer: 'Every extra dollar paid toward principal immediately reduces the remaining loan balance, meaning subsequent monthly interest charges are smaller. This creates a compounding effect that shaves years off the loan term and saves tens of thousands in interest.',
+  },
+];
+---
+
+<Layout
+  title="Mortgage Calculator & Amortization Schedule 2026 | GlobalTaxCalc"
+  description="Calculate monthly PITI mortgage payments, property taxes, PMI, and accelerated extra principal payoff schedules. Compare standard vs accelerated loan terms."
+  faqs={mortgageFaqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Mortgage Calculator', url: '/mortgage-calculator' },
+  ]}
+>
+  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-emerald-700 dark:text-emerald-300">
+      <span>🏡 Fixed Rate Mortgage & Early Payoff Modeling</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
+      Mortgage PITI & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Amortization Schedule</span>
+    </h1>
+
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Dissect monthly principal, interest, hazard insurance, property taxes, and PMI. Model extra principal payments to save thousands in lifetime interest charges.
+    </p>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 pb-14">
+    <MortgageCalculatorApp client:load initialHomePrice={450000} initialDownPayment={90000} initialRate={6.5} initialYears={30} />
+  </section>
+</Layout>

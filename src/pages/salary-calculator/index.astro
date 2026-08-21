@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { GLOBAL_COUNTRIES_DATA } from '../../data/globalTaxData';
+
+// Group countries by region
+const regions = ['Africa', 'Americas', 'Europe', 'Asia & Middle East', 'Oceania'] as const;
+
+const countriesByRegion = regions.map((region) => ({
+  region,
+  countries: GLOBAL_COUNTRIES_DATA.filter((c) => c.region === region),
+}));
+---
+
+<Layout
+  title="All Countries Salary & Tax Calculators 2026 Directory | GlobalTaxCalc"
+  description="Browse multi-country salary and income tax calculators across Africa, Europe, Americas, Asia-Pacific, and Oceania. Instant take-home pay estimations with zero server tracking."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Salary Calculators', url: '/salary-calculator' },
+  ]}
+>
+  <section class="py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+      Global Salary & Tax <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Jurisdiction Directory</span>
+    </h1>
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+      Select a country below to launch the dedicated payroll and income tax calculator preconfigured with statutory brackets, currency codes, and social security rules.
+    </p>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 pb-16 space-y-12">
+    {countriesByRegion.map(({ region, countries }) => (
+      <div class="space-y-4">
+        <h2 class="text-xl font-extrabold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2 flex items-center space-x-2">
+          <span>📍</span>
+          <span>{region}</span>
+          <span class="text-xs font-semibold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-full">
+            {countries.length} Countries
+          </span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {countries.map((c) => (
+            <a
+              href={`/salary-calculator/${c.countryCode.toLowerCase()}`}
+              class="group p-5 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md hover:border-emerald-500 transition space-y-2 flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-2xl">{c.flagEmoji}</span>
+                    <span class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+                      {c.countryName}
+                    </span>
+                  </div>
+                  <span class="text-xs font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg">
+                    {c.currencyCode}
+                  </span>
+                </div>
+
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">
+                  {c.summaryDescription}
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="text-[11px] font-bold text-slate-400">
+                  {c.taxSystem === 'ZERO_TAX' ? '0% Tax Regime' : `${c.taxSystem} (${c.brackets.length} Brackets)`}
+                </span>
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">
+                  Open Calculator →
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>

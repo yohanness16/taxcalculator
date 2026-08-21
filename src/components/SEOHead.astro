@@ -1,0 +1,91 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  faqs?: { question: string; answer: string }[];
+  breadcrumbs?: { name: string; url: string }[];
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogType = 'website',
+  faqs = [],
+  breadcrumbs = [],
+} = Astro.props;
+
+const siteName = 'GlobalTaxCalc';
+const defaultOgImage = 'https://taxcalcglobal.com/og-image.png';
+
+// JSON-LD: WebApplication Schema
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: title,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'All',
+  browserRequirements: 'Requires JavaScript and modern web browser',
+  offers: {
+    '@type': 'Offer',
+    price: '0.00',
+    priceCurrency: 'USD',
+  },
+  description: description,
+  url: canonicalUrl,
+};
+
+// JSON-LD: FAQPage Schema
+const faqSchema = faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+} : null;
+
+// JSON-LD: BreadcrumbList Schema
+const breadcrumbSchema = breadcrumbs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((b, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: b.name,
+    item: b.url,
+  })),
+} : null;
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={defaultOgImage} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={defaultOgImage} />
+
+<!-- JSON-LD Structured Data for Rich Search Results -->
+<script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}

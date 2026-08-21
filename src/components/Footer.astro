@@ -1,0 +1,101 @@
+---
+import { GLOBAL_COUNTRIES_DATA } from '../data/globalTaxData';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-white dark:bg-[#111827] border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs transition-colors mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 space-y-12">
+    
+    {/* 4-Column Directory Grid */}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      
+      {/* Col 1: African Jurisdictions */}
+      <div class="space-y-3">
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
+          African Payroll & Tax
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/salary-calculator/et" class="hover:text-emerald-500 transition flex items-center space-x-1.5">
+              <span>🇪🇹</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">Ethiopia Tax (Proc 1395/2025)</span>
+            </a>
+          </li>
+          <li><a href="/salary-calculator/ke" class="hover:text-emerald-500 transition">🇰🇪 Kenya PAYE & SHIF</a></li>
+          <li><a href="/salary-calculator/ng" class="hover:text-emerald-500 transition">🇳🇬 Nigeria FIRS PAYE</a></li>
+          <li><a href="/salary-calculator/za" class="hover:text-emerald-500 transition">🇿🇦 South Africa SARS</a></li>
+          <li><a href="/salary-calculator/gh" class="hover:text-emerald-500 transition">🇬🇭 Ghana GRA</a></li>
+          <li><a href="/salary-calculator/rw" class="hover:text-emerald-500 transition">🇷🇼 Rwanda RRA</a></li>
+        </ul>
+      </div>
+
+      {/* Col 2: Americas & Europe */}
+      <div class="space-y-3">
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
+          Americas & Europe
+        </h4>
+        <ul class="space-y-2">
+          <li><a href="/salary-calculator/us" class="hover:text-emerald-500 transition">🇺🇸 United States (IRS 2026)</a></li>
+          <li><a href="/salary-calculator/gb" class="hover:text-emerald-500 transition">🇬🇧 United Kingdom HMRC</a></li>
+          <li><a href="/salary-calculator/de" class="hover:text-emerald-500 transition">🇩🇪 Germany Lohnsteuer</a></li>
+          <li><a href="/salary-calculator/ca" class="hover:text-emerald-500 transition">🇨🇦 Canada CRA</a></li>
+          <li><a href="/salary-calculator/fr" class="hover:text-emerald-500 transition">🇫🇷 France DGFiP</a></li>
+          <li><a href="/salary-calculator/ch" class="hover:text-emerald-500 transition">🇨🇭 Switzerland FTA</a></li>
+        </ul>
+      </div>
+
+      {/* Col 3: Asia, Pacific & GCC 0% Tax */}
+      <div class="space-y-3">
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
+          Asia-Pacific & 0% Tax
+        </h4>
+        <ul class="space-y-2">
+          <li><a href="/salary-calculator/ae" class="hover:text-emerald-500 transition">🇦🇪 UAE (0% Personal Tax)</a></li>
+          <li><a href="/salary-calculator/sa" class="hover:text-emerald-500 transition">🇸🇦 Saudi Arabia (0% Tax)</a></li>
+          <li><a href="/salary-calculator/qa" class="hover:text-emerald-500 transition">🇶🇦 Qatar (0% Tax)</a></li>
+          <li><a href="/salary-calculator/in" class="hover:text-emerald-500 transition">🇮🇳 India Sec 115BAC</a></li>
+          <li><a href="/salary-calculator/au" class="hover:text-emerald-500 transition">🇦🇺 Australia ATO</a></li>
+          <li><a href="/salary-calculator/sg" class="hover:text-emerald-500 transition">🇸🇬 Singapore IRAS</a></li>
+          <li><a href="/salary-calculator/jp" class="hover:text-emerald-500 transition">🇯🇵 Japan NTA</a></li>
+        </ul>
+      </div>
+
+      {/* Col 4: Calculators & Legal */}
+      <div class="space-y-3">
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
+          Calculators & Legal
+        </h4>
+        <ul class="space-y-2">
+          <li><a href="/1099-tax-calculator" class="hover:text-emerald-500 transition">1099 Freelance Tax</a></li>
+          <li><a href="/mortgage-calculator" class="hover:text-emerald-500 transition">Mortgage & Amortization</a></li>
+          <li><a href="/fire-calculator" class="hover:text-emerald-500 transition">FIRE Retirement Calculator</a></li>
+          <li><a href="/tax-brackets" class="hover:text-emerald-500 transition">Tax Laws & Statutory Guides</a></li>
+          <li class="pt-2 border-t border-slate-200 dark:border-slate-800">
+            <a href="/privacy-policy" class="hover:text-emerald-500 transition">Privacy Policy (GDPR/CCPA)</a>
+          </li>
+          <li><a href="/terms-of-service" class="hover:text-emerald-500 transition">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-emerald-500 transition">Financial Disclaimer</a></li>
+          <li><a href="/contact" class="hover:text-emerald-500 transition">Contact Us</a></li>
+          <li><a href="/ads.txt" class="hover:text-emerald-500 transition font-mono text-[10px]">ads.txt</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    {/* Statutory Disclaimers & Google AdSense / Publisher Compliance Notice */}
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 space-y-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
+      <p>
+        <strong>Legal & Financial Disclaimer:</strong> The calculations, estimates, tax brackets, and figures generated on GlobalTaxCalc are provided for educational and illustrative budgeting purposes only. Tax legislation varies by jurisdiction, personal allowances, residency status, and marital situations. This platform does not provide formal legal, investment, or certified tax accounting advice. Always consult with a licensed CPA, tax attorney, or official revenue authority before filing returns or making financial commitments.
+      </p>
+      <p>
+        <strong>Advertising & Affiliate Disclosure:</strong> This website is monetized through programmatic advertising networks (including Google AdSense) and affiliate partnerships. We may receive financial compensation when users click on affiliate offers or open third-party partner accounts at no additional cost to you.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 text-xs font-semibold">
+        <span>© {currentYear} GlobalTaxCalc Platform. All rights reserved.</span>
+        <span class="text-slate-400 mt-2 sm:mt-0">Built with Astro 5 • Zero-Compute Edge Architecture</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
