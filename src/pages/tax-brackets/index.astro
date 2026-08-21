@@ -2,12 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import { GLOBAL_COUNTRIES_DATA } from '../../data/globalTaxData';
 
-const countries = GLOBAL_COUNTRIES_DATA;
+// Strict alphabetical sort (A to Z)
+const countries = [...GLOBAL_COUNTRIES_DATA].sort((a, b) =>
+  a.countryName.localeCompare(b.countryName)
+);
 ---
 
 <Layout
-  title="Global Tax Brackets & Statutory Tax Law Guides 2026 | GlobalTaxCalc"
-  description="Comprehensive statutory tax bracket guides, marginal tax rates, standard deductions, and social security legislation across all global jurisdictions."
+  title="Global Tax Brackets & Statutory Tax Law Guides 2026 (A–Z) | GlobalTaxCalc"
+  description="Comprehensive statutory tax bracket guides, marginal tax rates, standard deductions, and social security legislation across all global jurisdictions in alphabetical order."
   breadcrumbs={[
     { name: 'Home', url: '/' },
     { name: 'Tax Brackets', url: '/tax-brackets' },
@@ -15,10 +18,10 @@ const countries = GLOBAL_COUNTRIES_DATA;
 >
   <section class="py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
     <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-      Global Tax Brackets & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Statutory Tax Law Guides</span>
+      Global Tax Brackets & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Statutory Tax Law Guides (A–Z)</span>
     </h1>
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-      Explore official progressive marginal tax rates, personal tax allowances, and mandatory social security contributions for each country.
+      Explore official progressive marginal tax rates, personal tax allowances, and mandatory social security contributions for each country listed alphabetically.
     </p>
   </section>
 
