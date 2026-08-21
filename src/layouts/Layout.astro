@@ -11,6 +11,7 @@ export interface Props {
   canonicalUrl?: string;
   faqs?: { question: string; answer: string }[];
   breadcrumbs?: { name: string; url: string }[];
+  hreflangs?: { lang: string; url: string }[];
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   canonicalUrl,
   faqs,
   breadcrumbs,
+  hreflangs,
 } = Astro.props;
 
 // AdSense Publisher ID (Configured for live Google AdSense ads)
@@ -41,6 +43,7 @@ const adSenseClientId = 'ca-pub-6768212179657827';
       canonicalUrl={canonicalUrl}
       faqs={faqs}
       breadcrumbs={breadcrumbs}
+      hreflangs={hreflangs}
     />
 
     {/* Google Fonts: Inter & JetBrains Mono */}

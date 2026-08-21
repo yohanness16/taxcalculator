@@ -6,6 +6,7 @@ export interface Props {
   ogType?: string;
   faqs?: { question: string; answer: string }[];
   breadcrumbs?: { name: string; url: string }[];
+  hreflangs?: { lang: string; url: string }[];
 }
 
 const {
@@ -15,53 +16,66 @@ const {
   ogType = 'website',
   faqs = [],
   breadcrumbs = [],
+  hreflangs = [],
 } = Astro.props;
 
-const siteName = 'GlobalTaxCalc';
-const defaultOgImage = 'https://taxcalcglobal.com/og-image.png';
+const siteName = 'TOOLBOXS';
+const defaultOgImage = 'https://toolboxs.tech/og-image.png';
 
-// JSON-LD: WebApplication Schema
-const webAppSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: title,
-  applicationCategory: 'FinanceApplication',
-  operatingSystem: 'All',
-  browserRequirements: 'Requires JavaScript and modern web browser',
-  offers: {
-    '@type': 'Offer',
-    price: '0.00',
-    priceCurrency: 'USD',
-  },
-  description: description,
-  url: canonicalUrl,
-};
-
-// JSON-LD: FAQPage Schema
-const faqSchema = faqs.length > 0 ? {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer,
+// Unified @graph JSON-LD Schema (Google Search Central compliant)
+const graphNodes: any[] = [
+  {
+    '@type': 'WebApplication',
+    '@id': `${canonicalUrl}#webapp`,
+    name: title,
+    url: canonicalUrl,
+    applicationCategory: 'FinanceApplication',
+    applicationSubCategory: 'Payroll & Tax Calculator',
+    operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript and modern web browser',
+    softwareVersion: '2026.1',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
     },
-  })),
-} : null;
+    description: description,
+  },
+];
 
-// JSON-LD: BreadcrumbList Schema
-const breadcrumbSchema = breadcrumbs.length > 0 ? {
+if (faqs.length > 0) {
+  graphNodes.push({
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  });
+}
+
+if (breadcrumbs.length > 0) {
+  graphNodes.push({
+    '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumbs`,
+    itemListElement: breadcrumbs.map((b, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: b.name,
+      item: b.url,
+    })),
+  });
+}
+
+const unifiedGraphSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: breadcrumbs.map((b, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: b.name,
-    item: b.url,
-  })),
-} : null;
+  '@graph': graphNodes,
+};
 ---
 
 <!-- Primary Meta Tags -->
@@ -69,6 +83,12 @@ const breadcrumbSchema = breadcrumbs.length > 0 ? {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
+
+<!-- International Localization & Hreflang Tags -->
+{hreflangs.map((h) => (
+  <link rel="alternate" hreflang={h.lang} href={h.url} />
+))}
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={ogType} />
@@ -85,7 +105,5 @@ const breadcrumbSchema = breadcrumbs.length > 0 ? {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={defaultOgImage} />
 
-<!-- JSON-LD Structured Data for Rich Search Results -->
-<script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
-{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
-{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+<!-- Unified Multi-Entity @graph JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(unifiedGraphSchema)} />

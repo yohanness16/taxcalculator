@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --canvas-base: #080C14;       /* Deep Obsidian Base */
+  --surface-1: #0F1626;         /* Primary Card Surface */
+  --surface-2: #162035;         /* Elevated Interactive Panel */
+  --accent-emerald: #10B981;    /* Net Take-Home (Liquidity) */
+  --accent-indigo: #6366F1;     /* Income Tax Withholding */
+  --accent-amber: #F59E0B;      /* Pension & Social Security */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -9,7 +20,12 @@
   }
 
   body {
-    @apply bg-[#F8FAFC] text-slate-900 dark:bg-[#0B0F17] dark:text-slate-100 antialiased min-h-screen selection:bg-emerald-500 selection:text-white transition-colors duration-200;
+    @apply bg-[#F8FAFC] text-slate-900 dark:bg-[#080C14] dark:text-slate-100 antialiased min-h-screen selection:bg-emerald-500 selection:text-white transition-colors duration-200;
+  }
+
+  /* Strict zero layout-jitter tabular figures for financial numbers */
+  .font-mono, [data-financial-figure] {
+    font-variant-numeric: tabular-nums;
   }
 }
 
