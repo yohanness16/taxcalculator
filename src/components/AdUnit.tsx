@@ -38,10 +38,10 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
       return (
         <div
           ref={containerRef}
-          className={`ad-slot-leaderboard max-w-5xl mx-auto my-6 px-4 flex flex-col justify-center items-center rounded-xl bg-slate-50 dark:bg-slate-800/30 border border-slate-200/80 dark:border-slate-800/60 overflow-hidden relative ${className}`}
+          className={`ad-slot-leaderboard max-w-5xl mx-auto my-6 px-4 flex flex-col justify-center items-center rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 shadow-card-light dark:shadow-none overflow-hidden relative ${className}`}
           style={{ minHeight: '90px', contain: 'layout size' }}
         >
-          <div className="flex items-center justify-between w-full px-2 py-0.5 text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest border-b border-slate-200/40 dark:border-slate-800/40">
+          <div className="flex items-center justify-between w-full px-3 py-1 text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800/60">
             <span>Advertisement</span>
             <span>728x90 Leaderboard</span>
           </div>
@@ -64,18 +64,18 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
       return (
         <div
           ref={containerRef}
-          className={`ad-slot-sidebar sticky top-6 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-sm overflow-hidden ${className}`}
+          className={`ad-slot-sidebar sticky top-6 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-5 flex flex-col justify-between shadow-card-light dark:shadow-none overflow-hidden ${className}`}
           style={{ minHeight: '600px', contain: 'layout size' }}
         >
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 text-[10px] uppercase font-bold tracking-wider text-slate-400">
-            <span>Sponsored Ad Slot</span>
-            <span className="bg-emerald-100 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded text-[9px]">
-              300x600 Half-Page
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80 text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400">
+            <span>Sponsored Partner</span>
+            <span className="bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full text-[9px]">
+              300x600 Display
             </span>
           </div>
 
           {/* Actual Google AdSense Responsive Display Unit */}
-          <div className="my-auto flex justify-center">
+          <div className="my-auto flex justify-center py-2">
             <ins
               className="adsbygoogle"
               style={{ display: 'inline-block', width: '300px', height: '600px' }}
@@ -91,10 +91,10 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
       return (
         <div
           ref={containerRef}
-          className={`ad-slot-rectangle bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col justify-center items-center text-center ${className}`}
+          className={`ad-slot-rectangle bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-5 flex flex-col justify-center items-center text-center shadow-card-light dark:shadow-none ${className}`}
           style={{ minHeight: '250px', contain: 'layout size' }}
         >
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+          <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-2">
             Advertisement (300x250)
           </span>
           <div className="w-full flex justify-center">
@@ -113,14 +113,14 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
       return (
         <div
           ref={containerRef}
-          className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#151D2A]/95 backdrop-blur border-t border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 h-[50px] shadow-2xl transition-transform"
+          className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#0B1120]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between px-4 h-[52px] shadow-2xl transition-transform"
           style={{ contain: 'layout size' }}
         >
           <div className="flex items-center space-x-2">
-            <span className="text-[9px] uppercase font-bold bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">
+            <span className="text-[9px] uppercase font-mono font-bold bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60">
               Ad
             </span>
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[200px]">
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[180px]">
               Sponsored Partner Inventory
             </span>
           </div>
@@ -134,7 +134,7 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
             />
             <button
               onClick={() => setIsDismissed(true)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm p-1"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm p-1 ml-1"
               aria-label="Close Ad"
             >
               ✕

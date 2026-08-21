@@ -9,38 +9,44 @@ const countries = [...GLOBAL_COUNTRIES_DATA].sort((a, b) =>
 ---
 
 <Layout
-  title="Global Tax Brackets & Statutory Tax Law Guides 2026 (A–Z) | GlobalTaxCalc"
+  title="Global Tax Brackets & Statutory Tax Law Guides 2026 (A–Z) | TOOLBOXS"
   description="Comprehensive statutory tax bracket guides, marginal tax rates, standard deductions, and social security legislation across all global jurisdictions in alphabetical order."
   breadcrumbs={[
     { name: 'Home', url: '/' },
     { name: 'Tax Brackets', url: '/tax-brackets' },
   ]}
 >
-  <section class="py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300 shadow-xs">
+      <span>📚 Statutory Guides (2026 Fiscal Year)</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>Alphabetical Directory</span>
+    </div>
+
     <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-      Global Tax Brackets & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Statutory Tax Law Guides (A–Z)</span>
+      Global Tax Brackets & <span class="text-emerald-600 dark:text-emerald-400">Statutory Guides (A–Z)</span>
     </h1>
-    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
       Explore official progressive marginal tax rates, personal tax allowances, and mandatory social security contributions for each country listed alphabetically.
     </p>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 pb-16">
+  <section class="max-w-7xl mx-auto px-4 pb-20">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {countries.map((c) => (
         <a
           href={`/tax-brackets/${c.countryCode.toLowerCase()}`}
-          class="group p-6 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-lg hover:border-emerald-500 transition space-y-4 flex flex-col justify-between"
+          class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 flex flex-col justify-between hover:-translate-y-0.5"
         >
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
+              <div class="flex items-center space-x-2.5">
                 <span class="text-2xl">{c.flagEmoji}</span>
-                <h3 class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+                <h3 class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                   {c.countryName}
                 </h3>
               </div>
-              <span class="text-xs font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg">
+              <span class="text-[11px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
                 {c.taxSystem}
               </span>
             </div>
@@ -50,13 +56,13 @@ const countries = [...GLOBAL_COUNTRIES_DATA].sort((a, b) =>
             </p>
 
             <div class="text-[11px] text-slate-400 pt-1">
-              Legislation: <strong class="text-slate-600 dark:text-slate-300">{c.statutoryLegislation}</strong>
+              Legislation: <strong class="text-slate-700 dark:text-slate-300">{c.statutoryLegislation}</strong>
             </div>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-            <span class="text-slate-400 font-semibold">{c.brackets.length} Tax Brackets</span>
-            <span class="font-bold text-emerald-600 dark:text-emerald-400">View Tax Guide →</span>
+          <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-400 font-medium text-[11px]">{c.brackets.length} Tax Brackets</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform">View Tax Guide →</span>
           </div>
         </a>
       ))}

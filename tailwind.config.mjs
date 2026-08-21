@@ -19,23 +19,27 @@ export default {
           950: '#022c22',
         },
         obsidian: {
-          850: '#111827',
-          900: '#0b0f17',
-          950: '#070a10',
+          800: '#151d2a',
+          850: '#0f172a',
+          900: '#090d16',
+          950: '#05080f',
         },
         surface: {
           light: '#ffffff',
-          dark: '#151d2a',
-          card: '#1e293b',
+          dark: '#0f172a',
+          card: '#151f32',
+          muted: '#f8fafc',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
         'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.25)',
         'glow-indigo': '0 0 25px -5px rgba(99, 102, 241, 0.25)',
+        'card-light': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02)',
+        'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
       }
     },
   },

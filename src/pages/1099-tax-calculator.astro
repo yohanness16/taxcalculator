@@ -24,7 +24,7 @@ const usTaxFaqs = [
 ---
 
 <Layout
-  title="1099 Freelance & Self-Employment Tax Calculator 2026 | GlobalTaxCalc"
+  title="1099 Freelance & Self-Employment Tax Calculator 2026 | TOOLBOXS"
   description="Calculate federal income tax, 15.3% SECA self-employment tax, state tax, and quarterly estimated IRS payment deadlines across all 50 US states. Free with zero tracking."
   faqs={usTaxFaqs}
   breadcrumbs={[
@@ -32,13 +32,15 @@ const usTaxFaqs = [
     { name: '1099 Tax Calculator', url: '/1099-tax-calculator' },
   ]}
 >
-  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
-    <div class="inline-flex items-center space-x-2 bg-amber-50 dark:bg-amber-950/70 border border-amber-200 dark:border-amber-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-amber-700 dark:text-amber-300">
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-amber-50 dark:bg-amber-950/70 border border-amber-200/80 dark:border-amber-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-amber-700 dark:text-amber-300 shadow-xs">
       <span>🇺🇸 IRS Schedule C & Schedule SE 2026 Mechanics</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>Form 1040-ES</span>
     </div>
 
-    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
-      1099 Freelance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-emerald-600">Self-Employment Tax Calculator</span>
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+      1099 Freelance & <span class="text-emerald-600 dark:text-emerald-400">Self-Employment Tax Calculator</span>
     </h1>
 
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -46,12 +48,12 @@ const usTaxFaqs = [
     </p>
 
     {/* State Quick Links */}
-    <div class="flex flex-wrap items-center justify-center gap-1.5 pt-2">
+    <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
       <span class="text-xs font-bold text-slate-400 mr-1">Popular States:</span>
       {ALL_US_STATES.slice(0, 10).map((s) => (
         <a
           href={`/1099-tax/${s.stateName.toLowerCase().replace(/\s+/g, '-')}`}
-          class="text-xs font-bold px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:border-emerald-500 transition"
+          class="text-xs font-bold px-3 py-1.5 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-xl text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all shadow-xs"
         >
           {s.stateName}
         </a>
@@ -59,14 +61,14 @@ const usTaxFaqs = [
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 pb-14">
+  <section class="max-w-7xl mx-auto px-4 pb-16">
     <US1099TaxCalculatorApp client:load initialStateCode="CA" initialRevenue={100000} />
   </section>
 
-  {/* Educational Section for AdSense Valuable Content */}
-  <section class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-8">
+  {/* Educational Section */}
+  <section class="max-w-7xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
     <div class="text-center space-y-2">
-      <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
         Understanding Self-Employment Tax & Schedule C Deductions
       </h2>
       <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
@@ -75,8 +77,8 @@ const usTaxFaqs = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3 shadow-card-light dark:shadow-none">
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
           <span>🧾</span>
           <span>Maximize Schedule C Write-Offs</span>
         </h3>
@@ -85,8 +87,8 @@ const usTaxFaqs = [
         </p>
       </div>
 
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3 shadow-card-light dark:shadow-none">
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
           <span>📅</span>
           <span>Quarterly Safe Harbor Rule</span>
         </h3>
@@ -95,8 +97,8 @@ const usTaxFaqs = [
         </p>
       </div>
 
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3 shadow-card-light dark:shadow-none">
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
           <span>🏛️</span>
           <span>Section 199A QBI Deduction</span>
         </h3>

@@ -19,7 +19,7 @@ const fireFaqs = [
 ---
 
 <Layout
-  title="FIRE Retirement & Compound Interest SIP Calculator 2026 | GlobalTaxCalc"
+  title="FIRE Retirement & Compound Interest SIP Calculator 2026 | TOOLBOXS"
   description="Model your Financial Independence, Retire Early (FIRE) number with the 4% Safe Withdrawal Rate, simulate compound growth, and project your years to retirement."
   faqs={fireFaqs}
   breadcrumbs={[
@@ -27,13 +27,15 @@ const fireFaqs = [
     { name: 'FIRE Calculator', url: '/fire-calculator' },
   ]}
 >
-  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
-    <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-indigo-700 dark:text-indigo-300">
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200/80 dark:border-indigo-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-indigo-700 dark:text-indigo-300 shadow-xs">
       <span>🔥 Financial Independence, Retire Early (FIRE) Engine</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>SIP & DCA Compounding</span>
     </div>
 
-    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
-      FIRE Retirement & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-indigo-600">Compound Growth Calculator</span>
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+      FIRE Retirement & <span class="text-emerald-600 dark:text-emerald-400">Compound Growth Calculator</span>
     </h1>
 
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -41,7 +43,33 @@ const fireFaqs = [
     </p>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 pb-14">
+  <section class="max-w-7xl mx-auto px-4 pb-16">
     <FireInvestmentApp client:load />
+  </section>
+
+  {/* FAQ Section */}
+  <section class="max-w-4xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+        Frequently Asked Questions about FIRE & Compounding
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+        Everything you need to know about Safe Withdrawal Rates and investment growth.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {fireFaqs.map((faq) => (
+        <details class="group bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 shadow-card-light dark:shadow-none transition-all">
+          <summary class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none select-none">
+            <span>{faq.question}</span>
+            <span class="text-emerald-600 dark:text-emerald-400 group-open:rotate-180 transition-transform text-lg ml-4 flex-shrink-0">↓</span>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
   </section>
 </Layout>

@@ -3,29 +3,64 @@
 @tailwind utilities;
 
 :root {
-  --canvas-base: #080C14;       /* Deep Obsidian Base */
-  --surface-1: #0F1626;         /* Primary Card Surface */
-  --surface-2: #162035;         /* Elevated Interactive Panel */
-  --accent-emerald: #10B981;    /* Net Take-Home (Liquidity) */
-  --accent-indigo: #6366F1;     /* Income Tax Withholding */
-  --accent-amber: #F59E0B;      /* Pension & Social Security */
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --canvas-base: #090D16;
+  --surface-1: #0F172A;
+  --surface-2: #151F32;
+  --surface-3: #1E293B;
+  --accent-emerald: #10B981;
+  --accent-indigo: #6366F1;
+  --accent-amber: #F59E0B;
+  --accent-rose: #F43F5E;
+  --border-subtle-dark: rgba(255, 255, 255, 0.08);
+  --border-subtle-light: rgba(0, 0, 0, 0.08);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-[#F8FAFC] text-slate-900 dark:bg-[#080C14] dark:text-slate-100 antialiased min-h-screen selection:bg-emerald-500 selection:text-white transition-colors duration-200;
+    @apply bg-[#F8FAFC] text-slate-900 dark:bg-[#090D16] dark:text-slate-100 antialiased min-h-screen selection:bg-emerald-500 selection:text-white transition-colors duration-200;
   }
 
   /* Strict zero layout-jitter tabular figures for financial numbers */
   .font-mono, [data-financial-figure] {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Custom Range Slider Styles */
+  input[type=range] {
+    @apply accent-emerald-500 cursor-pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 9999px;
+    background: #10B981;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    border: 2px solid #ffffff;
+    transition: transform 0.15s ease;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  input[type=range]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 9999px;
+    background: #10B981;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    border: 2px solid #ffffff;
+    transition: transform 0.15s ease;
   }
 }
 
@@ -65,9 +100,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400 dark:bg-slate-600;
+  @apply bg-slate-300/80 dark:bg-slate-700/80 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
 }

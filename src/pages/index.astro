@@ -7,7 +7,7 @@ const featuredCountries = GLOBAL_COUNTRIES_DATA.slice(0, 12);
 const generalFaqs = [
   {
     question: 'How accurate are the salary and tax calculations on this platform?',
-    answer: 'All calculations are computed in real-time according to official statutory tax legislation (such as IRS Publication 15-T in the US, HMRC PAYE tables in the UK, BZSt regulations in Germany, and Proclamation No. 979/2016 in Ethiopia). They account for progressive tax brackets, standard deductions, and mandatory employee social security or pension contributions.',
+    answer: 'All calculations are computed in real-time according to official statutory tax legislation (such as IRS Publication 15-T in the US, HMRC PAYE tables in the UK, BZSt regulations in Germany, and Proclamation No. 1395/2025 in Ethiopia). They account for progressive tax brackets, standard deductions, and mandatory employee social security or pension contributions.',
   },
   {
     question: 'Are my financial figures or personal income details sent to a server?',
@@ -15,7 +15,7 @@ const generalFaqs = [
   },
   {
     question: 'Can I export an official PDF payslip breakdown of my estimated take-home pay?',
-    answer: 'Yes. With a single click on the "Download Official PDF Payslip" button, our client-side generator produces a high-resolution, formatted PDF statement containing your gross pay, itemized income taxes, social security contributions, and net take-home salary.',
+    answer: 'Yes. With a single click on the "Official PDF Payslip" button, our client-side generator produces a high-resolution, formatted PDF statement containing your gross pay, itemized income taxes, social security contributions, and net take-home salary.',
   },
   {
     question: 'How do I calculate taxes for 1099 self-employed freelance contractors?',
@@ -25,42 +25,43 @@ const generalFaqs = [
 ---
 
 <Layout
-  title="Global Tax Calculator & Take-Home Pay Engine 2026 | GlobalTaxCalc"
+  title="Global Tax Calculator & Take-Home Pay Engine 2026 | TOOLBOXS"
   description="Calculate your net take-home salary, income taxes, and pension deductions across United States, United Kingdom, Germany, Canada, Australia, Ethiopia, Kenya, UAE, and global jurisdictions. Fast, 100% client-side with PDF payslip export."
   faqs={generalFaqs}
 >
   {/* Hero Header Section */}
-  <section class="py-10 md:py-14 px-4 max-w-7xl mx-auto text-center space-y-4">
-    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-emerald-700 dark:text-emerald-300 shadow-sm">
-      <span>⚡ 2026 Statutory Tax Legislation Updated</span>
-      <span>•</span>
-      <span>Zero Server Latency</span>
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-5">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300 shadow-xs">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span>2026 Statutory Tax Legislation Active</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>Zero Server Tracking</span>
     </div>
 
-    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
-      Global Salary & Tax <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Take-Home Intelligence</span>
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-[1.15]">
+      Global Salary & Tax <span class="text-emerald-600 dark:text-emerald-400">Take-Home Intelligence</span>
     </h1>
 
     <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-      Instant, mathematically precise payroll calculations for United States, UK, Germany, Canada, Australia, Kenya, Ethiopia, UAE, India, and global jurisdictions. Dissect take-home pay, progressive tax brackets, and social security withholdings.
+      Instant, mathematically precise payroll calculations across United States, UK, Germany, Canada, Australia, Kenya, Ethiopia, UAE, and 100+ global jurisdictions. Dissect take-home pay, progressive tax brackets, and social security withholdings.
     </p>
 
     {/* Quick Country Pills */}
-    <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+    <div class="flex flex-wrap items-center justify-center gap-2 pt-3">
       {featuredCountries.map((c) => (
         <a
           href={`/salary-calculator/${c.countryCode.toLowerCase()}`}
-          class="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition shadow-sm"
+          class="inline-flex items-center space-x-2 px-3.5 py-2 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all shadow-xs hover:-translate-y-0.5"
         >
-          <span>{c.flagEmoji}</span>
+          <span class="text-sm">{c.flagEmoji}</span>
           <span>{c.countryName}</span>
         </a>
       ))}
       <a
         href="/salary-calculator"
-        class="inline-flex items-center space-x-1 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 transition"
+        class="inline-flex items-center space-x-1.5 px-4 py-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 rounded-2xl text-xs font-extrabold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-all shadow-xs"
       >
-        <span>View All Countries →</span>
+        <span>View All Countries (A–Z) →</span>
       </a>
     </div>
   </section>
@@ -71,13 +72,13 @@ const generalFaqs = [
   </section>
 
   {/* Top Financial Calculators Navigation Cards */}
-  <section class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800">
+  <section class="max-w-7xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80">
     <div class="text-center space-y-2 mb-10">
-      <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
         Comprehensive Financial Intelligence Suite
       </h2>
       <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-        Explore specialized engines engineered for mortgage amortization, freelance 1099 taxes, compound investment growth, and FIRE retirement modeling.
+        Specialized mathematical engines engineered for mortgage amortization, freelance 1099 taxes, compound investment growth, and FIRE retirement modeling.
       </p>
     </div>
 
@@ -86,20 +87,20 @@ const generalFaqs = [
       {/* 1099 Tool */}
       <a
         href="/1099-tax-calculator"
-        class="group p-6 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-lg hover:border-emerald-500 transition space-y-4"
+        class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 hover:-translate-y-1"
       >
-        <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 flex items-center justify-center text-2xl text-amber-500 font-bold group-hover:scale-110 transition-transform">
+        <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-2xl text-amber-500 font-bold group-hover:scale-105 transition-transform">
           💼
         </div>
-        <div class="space-y-1">
-          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+        <div class="space-y-1.5">
+          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             1099 Freelance & SECA Tax
           </h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Calculate IRS Schedule SE self-employment taxes (15.3%), federal progressive brackets, state tax liabilities, and Form 1040-ES quarterly estimated tax payment deadlines.
           </p>
         </div>
-        <span class="inline-flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
+        <span class="inline-flex items-center text-xs font-extrabold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
           Calculate 1099 Tax →
         </span>
       </a>
@@ -107,20 +108,20 @@ const generalFaqs = [
       {/* Mortgage Tool */}
       <a
         href="/mortgage-calculator"
-        class="group p-6 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-lg hover:border-emerald-500 transition space-y-4"
+        class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 hover:-translate-y-1"
       >
-        <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-2xl text-emerald-500 font-bold group-hover:scale-110 transition-transform">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-900/50 flex items-center justify-center text-2xl text-emerald-500 font-bold group-hover:scale-105 transition-transform">
           🏡
         </div>
-        <div class="space-y-1">
-          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+        <div class="space-y-1.5">
+          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             Mortgage PITI & Amortization
           </h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Dissect monthly principal, interest, taxes, home insurance, and PMI. Model extra principal payment acceleration to save thousands in lifetime interest.
           </p>
         </div>
-        <span class="inline-flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
+        <span class="inline-flex items-center text-xs font-extrabold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
           Analyze Amortization Schedule →
         </span>
       </a>
@@ -128,20 +129,20 @@ const generalFaqs = [
       {/* FIRE Tool */}
       <a
         href="/fire-calculator"
-        class="group p-6 bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-lg hover:border-emerald-500 transition space-y-4"
+        class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 hover:-translate-y-1"
       >
-        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-2xl text-indigo-500 font-bold group-hover:scale-110 transition-transform">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/60 dark:border-indigo-900/50 flex items-center justify-center text-2xl text-indigo-500 font-bold group-hover:scale-105 transition-transform">
           🔥
         </div>
-        <div class="space-y-1">
-          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+        <div class="space-y-1.5">
+          <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             FIRE & SIP Compound Growth
           </h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Simulate dollar-cost averaging (DCA), future portfolio compounding, and Safe Withdrawal Rate (SWR 3.3% - 4.0%) targets to achieve financial freedom.
           </p>
         </div>
-        <span class="inline-flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
+        <span class="inline-flex items-center text-xs font-extrabold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
           Model Retirement Timeline →
         </span>
       </a>
@@ -149,11 +150,11 @@ const generalFaqs = [
     </div>
   </section>
 
-  {/* In-Depth Multi-Jurisdiction Educational Articles (AdSense Valuable Content Policy Compliant) */}
-  <section class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-8">
+  {/* In-Depth Multi-Jurisdiction Educational Articles */}
+  <section class="max-w-7xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
     <div class="text-center space-y-2">
-      <h2 class="text-2xl font-black text-slate-900 dark:text-white">
-        Global Taxation Mechanics & Statutory Legal Frameworks
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+        Global Taxation Mechanics & Statutory Frameworks
       </h2>
       <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
         Understanding progressive marginal brackets, social insurance systems, and net salary algorithms across world jurisdictions.
@@ -163,42 +164,42 @@ const generalFaqs = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
       
       {/* Article 1: US */}
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <div class="flex items-center space-x-2">
-          <span class="text-lg">🇺🇸</span>
-          <h3 class="font-bold text-base text-slate-900 dark:text-slate-100">
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3.5 shadow-card-light dark:shadow-none">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">🇺🇸</span>
+          <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100">
             United States: Progressive Brackets & FICA
           </h3>
         </div>
         <p>
-          The US federal income tax evaluates progressive marginal brackets (10% to 37%) according to <strong>IRS Publication 15-T</strong> withholding tables. Taxable income is calculated after deducting the Standard Deduction ($15,000 for single filers in 2026).
+          The US federal income tax evaluates progressive marginal brackets (10% to 37%) according to <strong class="text-slate-800 dark:text-slate-200">IRS Publication 15-T</strong> withholding tables. Taxable income is calculated after deducting the Standard Deduction ($15,000 for single filers in 2026).
         </p>
         <p>
-          FICA payroll taxes apply to earned wages: 6.2% Social Security up to the $176,100 statutory wage cap, and 1.45% Medicare uncapped on all earned income.
+          FICA payroll taxes apply to earned wages: 6.2% Social Security up to the $176,100 statutory wage cap, and 1.45% Medicare uncapped on all earned compensation.
         </p>
       </div>
 
       {/* Article 2: UK & Germany */}
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <div class="flex items-center space-x-2">
-          <span class="text-lg">🇬🇧 / 🇩🇪</span>
-          <h3 class="font-bold text-base text-slate-900 dark:text-slate-100">
-            Europe: HMRC PAYE & German Tariff Zones
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3.5 shadow-card-light dark:shadow-none">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">🇬🇧</span>
+          <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100">
+            Europe: HMRC PAYE & German Tariffs
           </h3>
         </div>
         <p>
           The UK HMRC PAYE framework incorporates a £12,570 tax-free Personal Allowance followed by 20%, 40%, and 45% bands, alongside Class 1 National Insurance contributions.
         </p>
         <p>
-          Germany utilizes linear progressive tariff zones (14% to 42% Spitzensteuersatz) under the <em>Einkommensteuergesetz</em>, paired with ~20.95% statutory social security (pension, health, care, and unemployment).
+          Germany utilizes linear progressive tariff zones (14% to 42% Spitzensteuersatz) under the <em class="text-slate-800 dark:text-slate-200">Einkommensteuergesetz</em>, paired with ~20.95% statutory social security (pension, health, care, and unemployment).
         </p>
       </div>
 
       {/* Article 3: Zero-Tax & Africa */}
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-        <div class="flex items-center space-x-2">
-          <span class="text-lg">🇦🇪 / 🌍</span>
-          <h3 class="font-bold text-base text-slate-900 dark:text-slate-100">
+      <div class="bg-white dark:bg-[#0F172A] p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-3.5 shadow-card-light dark:shadow-none">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">🇦🇪</span>
+          <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100">
             Zero-Tax Regimes & Emerging Markets
           </h3>
         </div>
@@ -213,25 +214,25 @@ const generalFaqs = [
     </div>
   </section>
 
-  {/* FAQ Accordion Section for Rich Search Results */}
-  <section class="max-w-4xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-6">
+  {/* FAQ Accordion Section */}
+  <section class="max-w-4xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
     <div class="text-center space-y-2">
-      <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
         Frequently Asked Questions
       </h2>
-      <p class="text-xs text-slate-500 dark:text-slate-400">
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
         Everything you need to know about global tax estimations and platform mechanics.
       </p>
     </div>
 
     <div class="space-y-4">
-      {generalFaqs.map((faq, idx) => (
-        <details class="group bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
-          <summary class="font-bold text-sm text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none">
+      {generalFaqs.map((faq) => (
+        <details class="group bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 shadow-card-light dark:shadow-none transition-all">
+          <summary class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none select-none">
             <span>{faq.question}</span>
-            <span class="text-emerald-500 group-open:rotate-180 transition-transform text-base">↓</span>
+            <span class="text-emerald-600 dark:text-emerald-400 group-open:rotate-180 transition-transform text-lg ml-4 flex-shrink-0">↓</span>
           </summary>
-          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/80">
             {faq.answer}
           </p>
         </details>

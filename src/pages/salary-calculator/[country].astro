@@ -23,7 +23,7 @@ const faqs = GLOBAL_TAX_FAQS[countryData.countryCode] || [
   },
 ];
 
-const pageTitle = `${countryData.countryName} Salary Calculator 2026 - Net Take-Home & Income Tax | GlobalTaxCalc`;
+const pageTitle = `${countryData.countryName} Salary Calculator 2026 - Net Take-Home & Income Tax | TOOLBOXS`;
 const pageDescription = `Calculate your 2026 net take-home salary, income taxes, and pension deductions in ${countryData.countryName} (${countryData.currencyCode}). Based on ${countryData.statutoryLegislation}.`;
 ---
 
@@ -38,16 +38,16 @@ const pageDescription = `Calculate your 2026 net take-home salary, income taxes,
   ]}
 >
   {/* Country Hero Header */}
-  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
-    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-emerald-700 dark:text-emerald-300">
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300 shadow-xs">
       <span class="text-base">{countryData.flagEmoji}</span>
       <span>{countryData.countryName} Statutory Tax System</span>
-      <span>•</span>
-      <span>{countryData.currencyCode}</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span class="font-mono">{countryData.currencyCode}</span>
     </div>
 
-    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
-      {countryData.countryName} <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Salary & Take-Home Calculator</span>
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+      {countryData.countryName} <span class="text-emerald-600 dark:text-emerald-400">Salary & Take-Home Calculator</span>
     </h1>
 
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -56,7 +56,7 @@ const pageDescription = `Calculate your 2026 net take-home salary, income taxes,
   </section>
 
   {/* Interactive Calculator App preloaded with this country */}
-  <section class="max-w-7xl mx-auto px-4 pb-14">
+  <section class="max-w-7xl mx-auto px-4 pb-16">
     <GlobalTaxCalculatorApp
       client:load
       initialCountryCode={countryData.countryCode}
@@ -65,25 +65,25 @@ const pageDescription = `Calculate your 2026 net take-home salary, income taxes,
   </section>
 
   {/* Statutory Legal & Tax Details */}
-  <section class="max-w-7xl mx-auto px-4 py-10 border-t border-slate-200 dark:border-slate-800 space-y-8">
+  <section class="max-w-7xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
       
       {/* Statutory Rules Card */}
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-          <span>⚖️</span>
+      <div class="bg-white dark:bg-[#0F172A] p-7 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-4 shadow-card-light dark:shadow-none">
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+          <span class="text-lg">⚖️</span>
           <span>{countryData.countryName} Legal Framework</span>
         </h3>
         <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-          Administered by <strong>{countryData.taxAuthorityName}</strong> under <strong>{countryData.statutoryLegislation}</strong>.
+          Administered by <strong class="text-slate-800 dark:text-slate-200">{countryData.taxAuthorityName}</strong> under <strong class="text-slate-800 dark:text-slate-200">{countryData.statutoryLegislation}</strong>.
         </p>
 
         {countryData.allowancesAndExemptions && (
           <div class="space-y-2 pt-2">
-            <span class="font-bold text-slate-700 dark:text-slate-300 block">Key Deductions & Exemptions:</span>
-            <ul class="space-y-1.5 list-disc pl-4 text-slate-600 dark:text-slate-400 text-xs">
+            <span class="font-bold text-slate-800 dark:text-slate-200 block text-xs uppercase tracking-wider">Key Deductions & Allowances:</span>
+            <ul class="space-y-2 list-disc pl-4 text-slate-600 dark:text-slate-400 text-xs">
               {countryData.allowancesAndExemptions.map((rule) => (
-                <li>{rule}</li>
+                <li class="leading-relaxed">{rule}</li>
               ))}
             </ul>
           </div>
@@ -91,27 +91,27 @@ const pageDescription = `Calculate your 2026 net take-home salary, income taxes,
       </div>
 
       {/* Tax Brackets Summary Table */}
-      <div class="bg-white dark:bg-[#151D2A] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-        <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-          <span>📊</span>
-          <span>Official Marginal Tax Brackets</span>
+      <div class="bg-white dark:bg-[#0F172A] p-7 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 space-y-4 shadow-card-light dark:shadow-none">
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+          <span class="text-lg">📊</span>
+          <span>Official Marginal Tax Brackets (2026)</span>
         </h3>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs">
             <thead>
-              <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase">
-                <th class="pb-2">Taxable Range ({countryData.currencyCode})</th>
-                <th class="pb-2 text-right">Marginal Rate</th>
+              <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                <th class="pb-3">Taxable Range ({countryData.currencyCode})</th>
+                <th class="pb-3 text-right">Marginal Rate</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80 font-mono">
               {countryData.brackets.map((b) => (
-                <tr>
-                  <td class="py-2 text-slate-800 dark:text-slate-200">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
+                  <td class="py-2.5 font-sans text-slate-800 dark:text-slate-200 font-medium">
                     {b.description || `${countryData.currencySymbol} ${b.thresholdMin.toLocaleString()} – ${b.thresholdMax === Infinity ? 'Above' : b.thresholdMax.toLocaleString()}`}
                   </td>
-                  <td class="py-2 text-right font-bold text-rose-500">
+                  <td class="py-2.5 text-right font-bold text-rose-500">
                     {(b.marginalRate * 100).toFixed(1)}%
                   </td>
                 </tr>
@@ -125,24 +125,24 @@ const pageDescription = `Calculate your 2026 net take-home salary, income taxes,
   </section>
 
   {/* Country Specific FAQ Section */}
-  <section class="max-w-4xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-6">
-    <div class="text-center space-y-1">
-      <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+  <section class="max-w-4xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
         Frequently Asked Questions about {countryData.countryName} Taxes
       </h2>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
         Statutory answers regarding PAYE, payroll withholding, and social security.
       </p>
     </div>
 
-    <div class="space-y-3">
+    <div class="space-y-4">
       {faqs.map((faq) => (
-        <details class="group bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
-          <summary class="font-bold text-sm text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none">
+        <details class="group bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 shadow-card-light dark:shadow-none transition-all">
+          <summary class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none select-none">
             <span>{faq.question}</span>
-            <span class="text-emerald-500 group-open:rotate-180 transition-transform">↓</span>
+            <span class="text-emerald-600 dark:text-emerald-400 group-open:rotate-180 transition-transform text-lg ml-4 flex-shrink-0">↓</span>
           </summary>
-          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/80">
             {faq.answer}
           </p>
         </details>

@@ -4,7 +4,7 @@ import { GLOBAL_COUNTRIES_DATA } from '../data/globalTaxData';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-white dark:bg-[#111827] border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs transition-colors mt-20">
+<footer class="bg-white dark:bg-[#060A12] border-t border-slate-200/80 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 text-xs transition-colors mt-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 space-y-12">
     
     {/* 4-Column Directory Grid */}
@@ -12,88 +12,97 @@ const currentYear = new Date().getFullYear();
       
       {/* Col 1: African Jurisdictions */}
       <div class="space-y-3">
-        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
-          African Payroll & Tax
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px] flex items-center space-x-1.5">
+          <span>🌍</span>
+          <span>African Payroll & Tax</span>
         </h4>
         <ul class="space-y-2">
           <li>
-            <a href="/salary-calculator/et" class="hover:text-emerald-500 transition flex items-center space-x-1.5">
+            <a href="/salary-calculator/et" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5">
               <span>🇪🇹</span>
-              <span class="font-semibold text-emerald-600 dark:text-emerald-400">Ethiopia Tax (Proc 1395/2025)</span>
+              <span class="font-semibold text-emerald-700 dark:text-emerald-400">Ethiopia (Proc 1395/2025)</span>
             </a>
           </li>
-          <li><a href="/salary-calculator/ke" class="hover:text-emerald-500 transition">🇰🇪 Kenya PAYE & SHIF</a></li>
-          <li><a href="/salary-calculator/ng" class="hover:text-emerald-500 transition">🇳🇬 Nigeria FIRS PAYE</a></li>
-          <li><a href="/salary-calculator/za" class="hover:text-emerald-500 transition">🇿🇦 South Africa SARS</a></li>
-          <li><a href="/salary-calculator/gh" class="hover:text-emerald-500 transition">🇬🇭 Ghana GRA</a></li>
-          <li><a href="/salary-calculator/rw" class="hover:text-emerald-500 transition">🇷🇼 Rwanda RRA</a></li>
+          <li><a href="/salary-calculator/ke" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇰🇪</span><span>Kenya PAYE & SHIF</span></a></li>
+          <li><a href="/salary-calculator/ng" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇳🇬</span><span>Nigeria FIRS PAYE</span></a></li>
+          <li><a href="/salary-calculator/za" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇿🇦</span><span>South Africa SARS</span></a></li>
+          <li><a href="/salary-calculator/gh" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇬🇭</span><span>Ghana GRA</span></a></li>
+          <li><a href="/salary-calculator/rw" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇷🇼</span><span>Rwanda RRA</span></a></li>
         </ul>
       </div>
 
       {/* Col 2: Americas & Europe */}
       <div class="space-y-3">
-        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
-          Americas & Europe
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px] flex items-center space-x-1.5">
+          <span>🏛️</span>
+          <span>Americas & Europe</span>
         </h4>
         <ul class="space-y-2">
-          <li><a href="/salary-calculator/us" class="hover:text-emerald-500 transition">🇺🇸 United States (IRS 2026)</a></li>
-          <li><a href="/salary-calculator/gb" class="hover:text-emerald-500 transition">🇬🇧 United Kingdom HMRC</a></li>
-          <li><a href="/salary-calculator/de" class="hover:text-emerald-500 transition">🇩🇪 Germany Lohnsteuer</a></li>
-          <li><a href="/salary-calculator/ca" class="hover:text-emerald-500 transition">🇨🇦 Canada CRA</a></li>
-          <li><a href="/salary-calculator/fr" class="hover:text-emerald-500 transition">🇫🇷 France DGFiP</a></li>
-          <li><a href="/salary-calculator/ch" class="hover:text-emerald-500 transition">🇨🇭 Switzerland FTA</a></li>
+          <li><a href="/salary-calculator/us" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇺🇸</span><span>United States (IRS 2026)</span></a></li>
+          <li><a href="/salary-calculator/gb" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇬🇧</span><span>United Kingdom HMRC</span></a></li>
+          <li><a href="/salary-calculator/de" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇩🇪</span><span>Germany Lohnsteuer</span></a></li>
+          <li><a href="/salary-calculator/ca" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇨🇦</span><span>Canada CRA</span></a></li>
+          <li><a href="/salary-calculator/fr" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇫🇷</span><span>France DGFiP</span></a></li>
+          <li><a href="/salary-calculator/ch" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇨🇭</span><span>Switzerland FTA</span></a></li>
         </ul>
       </div>
 
       {/* Col 3: Asia, Pacific & GCC 0% Tax */}
       <div class="space-y-3">
-        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
-          Asia-Pacific & 0% Tax
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px] flex items-center space-x-1.5">
+          <span>🌴</span>
+          <span>Asia-Pacific & 0% Tax</span>
         </h4>
         <ul class="space-y-2">
-          <li><a href="/salary-calculator/ae" class="hover:text-emerald-500 transition">🇦🇪 UAE (0% Personal Tax)</a></li>
-          <li><a href="/salary-calculator/sa" class="hover:text-emerald-500 transition">🇸🇦 Saudi Arabia (0% Tax)</a></li>
-          <li><a href="/salary-calculator/qa" class="hover:text-emerald-500 transition">🇶🇦 Qatar (0% Tax)</a></li>
-          <li><a href="/salary-calculator/in" class="hover:text-emerald-500 transition">🇮🇳 India Sec 115BAC</a></li>
-          <li><a href="/salary-calculator/au" class="hover:text-emerald-500 transition">🇦🇺 Australia ATO</a></li>
-          <li><a href="/salary-calculator/sg" class="hover:text-emerald-500 transition">🇸🇬 Singapore IRAS</a></li>
-          <li><a href="/salary-calculator/jp" class="hover:text-emerald-500 transition">🇯🇵 Japan NTA</a></li>
+          <li><a href="/salary-calculator/ae" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇦🇪</span><span>UAE (0% Personal Tax)</span></a></li>
+          <li><a href="/salary-calculator/sa" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇸🇦</span><span>Saudi Arabia (0% Tax)</span></a></li>
+          <li><a href="/salary-calculator/qa" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇶🇦</span><span>Qatar (0% Tax)</span></a></li>
+          <li><a href="/salary-calculator/in" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇮🇳</span><span>India Sec 115BAC</span></a></li>
+          <li><a href="/salary-calculator/au" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇦🇺</span><span>Australia ATO</span></a></li>
+          <li><a href="/salary-calculator/sg" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇸🇬</span><span>Singapore IRAS</span></a></li>
+          <li><a href="/salary-calculator/jp" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center space-x-1.5"><span>🇯🇵</span><span>Japan NTA</span></a></li>
         </ul>
       </div>
 
       {/* Col 4: Calculators & Legal */}
       <div class="space-y-3">
-        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px]">
-          Calculators & Legal
+        <h4 class="font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider text-[11px] flex items-center space-x-1.5">
+          <span>⚙️</span>
+          <span>Calculators & Legal</span>
         </h4>
         <ul class="space-y-2">
-          <li><a href="/1099-tax-calculator" class="hover:text-emerald-500 transition">1099 Freelance Tax</a></li>
-          <li><a href="/mortgage-calculator" class="hover:text-emerald-500 transition">Mortgage & Amortization</a></li>
-          <li><a href="/fire-calculator" class="hover:text-emerald-500 transition">FIRE Retirement Calculator</a></li>
-          <li><a href="/tax-brackets" class="hover:text-emerald-500 transition">Tax Laws & Statutory Guides</a></li>
-          <li class="pt-2 border-t border-slate-200 dark:border-slate-800">
-            <a href="/privacy-policy" class="hover:text-emerald-500 transition">Privacy Policy (GDPR/CCPA)</a>
+          <li><a href="/1099-tax-calculator" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">1099 Freelance & SECA</a></li>
+          <li><a href="/mortgage-calculator" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Mortgage & Amortization</a></li>
+          <li><a href="/fire-calculator" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">FIRE Retirement & SIP</a></li>
+          <li><a href="/tax-brackets" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Tax Laws & Statutory Guides</a></li>
+          <li class="pt-2 border-t border-slate-200/80 dark:border-slate-800/80">
+            <a href="/privacy-policy" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Privacy Policy (GDPR/CCPA)</a>
           </li>
-          <li><a href="/terms-of-service" class="hover:text-emerald-500 transition">Terms of Service</a></li>
-          <li><a href="/disclaimer" class="hover:text-emerald-500 transition">Financial Disclaimer</a></li>
-          <li><a href="/contact" class="hover:text-emerald-500 transition">Contact Us</a></li>
-          <li><a href="/ads.txt" class="hover:text-emerald-500 transition font-mono text-[10px]">ads.txt</a></li>
+          <li><a href="/terms-of-service" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Financial Disclaimer</a></li>
+          <li><a href="/contact" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Contact Us</a></li>
         </ul>
       </div>
 
     </div>
 
     {/* Statutory Disclaimers & Google AdSense / Publisher Compliance Notice */}
-    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 space-y-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
-      <p>
-        <strong>Legal & Financial Disclaimer:</strong> The calculations, estimates, tax brackets, and figures generated on TOOLBOXS are provided for educational and illustrative budgeting purposes only. Tax legislation varies by jurisdiction, personal allowances, residency status, and marital situations. This platform does not provide formal legal, investment, or certified tax accounting advice. Always consult with a licensed CPA, tax attorney, or official revenue authority before filing returns or making financial commitments.
-      </p>
-      <p>
-        <strong>Advertising & Affiliate Disclosure:</strong> This website is monetized through programmatic advertising networks (including Google AdSense) and affiliate partnerships. We may receive financial compensation when users click on affiliate offers or open third-party partner accounts at no additional cost to you.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 text-xs font-semibold">
-        <span>© {currentYear} Toolboxs (toolboxs.tech) • All rights reserved. Data updated for 2026 fiscal year legislation.</span>
-        <span class="text-slate-400 mt-2 sm:mt-0">Built with Astro 5 • Zero-Compute Edge Architecture</span>
+    <div class="pt-8 border-t border-slate-200/80 dark:border-slate-800/80 space-y-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60 space-y-2">
+        <p>
+          <strong class="text-slate-700 dark:text-slate-300">Legal & Financial Disclaimer:</strong> Calculations, estimates, tax brackets, and figures generated on TOOLBOXS are provided for educational and illustrative budgeting purposes only. Tax legislation varies by jurisdiction, personal allowances, residency status, and marital situations. This platform does not provide formal legal, investment, or certified tax accounting advice. Always consult with a licensed CPA, tax attorney, or official revenue authority before filing returns or making financial commitments.
+        </p>
+        <p>
+          <strong class="text-slate-700 dark:text-slate-300">Monetization Disclosure:</strong> This platform is supported through programmatic advertising networks and affiliate partnerships. We may receive compensation when users explore partner financial products at no additional cost to you.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <div class="flex items-center space-x-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>© {currentYear} Toolboxs (toolboxs.tech). Updated for 2026 fiscal legislation.</span>
+        </div>
+        <span class="text-slate-400 mt-2 sm:mt-0 font-mono text-[11px]">100% Client-Side Engine • Zero Server Latency</span>
       </div>
     </div>
 

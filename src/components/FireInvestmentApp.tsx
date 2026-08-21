@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Flame, TrendingUp, Sparkles, Target, DollarSign, Clock, ShieldAlert } from 'lucide-react';
 import { calculateInvestmentGrowth, calculateFIRE } from '../engines/investmentFireEngine';
 import AffiliateCard from './AffiliateCard';
 import AdUnit from './AdUnit';
@@ -49,26 +50,28 @@ export default function FireInvestmentApp() {
 
       {/* Mode Switcher */}
       <div className="flex justify-center">
-        <div className="bg-slate-200 dark:bg-slate-800 p-1.5 rounded-2xl flex text-xs font-extrabold shadow-inner">
+        <div className="bg-slate-100 dark:bg-slate-800/90 p-1.5 rounded-2xl flex text-xs font-bold shadow-card-light dark:shadow-none border border-slate-200/80 dark:border-slate-700/80">
           <button
             onClick={() => setActiveTab('FIRE')}
-            className={`px-6 py-2.5 rounded-xl transition ${
+            className={`px-5 sm:px-6 py-2.5 rounded-xl transition-all flex items-center space-x-2 ${
               activeTab === 'FIRE'
-                ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-md'
-                : 'text-slate-500 hover:text-slate-800 dark:text-slate-300'
+                ? 'bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-400 shadow-sm font-extrabold'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            🔥 FIRE Retirement Modeling (SWR 4%)
+            <Flame className="w-4 h-4 text-amber-500" />
+            <span>FIRE Retirement Modeling (SWR 4%)</span>
           </button>
           <button
             onClick={() => setActiveTab('SIP')}
-            className={`px-6 py-2.5 rounded-xl transition ${
+            className={`px-5 sm:px-6 py-2.5 rounded-xl transition-all flex items-center space-x-2 ${
               activeTab === 'SIP'
-                ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-md'
-                : 'text-slate-500 hover:text-slate-800 dark:text-slate-300'
+                ? 'bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-400 shadow-sm font-extrabold'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            📈 SIP & Compound Growth
+            <TrendingUp className="w-4 h-4 text-emerald-500" />
+            <span>SIP & Compound Growth</span>
           </button>
         </div>
       </div>
@@ -76,70 +79,76 @@ export default function FireInvestmentApp() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Left Column: Form Controls & Projection */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white dark:bg-[#151D2A] p-6 sm:p-7 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-              {activeTab === 'FIRE' ? 'Financial Independence Parameters' : 'Compound Interest & SIP Parameters'}
-            </h2>
+          <div className="bg-white dark:bg-[#0F172A] p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-card-light dark:shadow-none space-y-7 transition-all">
+            <div className="pb-4 border-b border-slate-100 dark:border-slate-800/80">
+              <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+                <Target className="w-5 h-5 text-emerald-500" />
+                <span>{activeTab === 'FIRE' ? 'Financial Independence Parameters' : 'Compound Interest & SIP Parameters'}</span>
+              </h2>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {activeTab === 'FIRE' ? 'Model savings rate, withdrawal thresholds, and timeline to freedom' : 'Simulate long-term capital compounding and wealth accumulation'}
+              </p>
+            </div>
 
             {activeTab === 'FIRE' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Current Age ({currentAge} yrs)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Current Age ({currentAge} yrs)</label>
                   <input
                     type="number"
                     value={currentAge}
                     onChange={(e) => setCurrentAge(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Current Portfolio / Net Worth ($)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Current Net Worth ($)</label>
                   <input
                     type="number"
                     value={currentNetWorth}
                     onChange={(e) => setCurrentNetWorth(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Annual Living Expenses ($)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Annual Living Expenses ($)</label>
                   <input
                     type="number"
                     value={annualExpenses}
                     onChange={(e) => setAnnualExpenses(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Annual Income ($)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Annual Income ($)</label>
                   <input
                     type="number"
                     value={annualIncome}
                     onChange={(e) => setAnnualIncome(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Expected Portfolio Return (%)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Expected Annual Return (%)</label>
                   <input
                     type="number"
                     step={0.5}
                     value={expectedReturn}
                     onChange={(e) => setExpectedReturn(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Safe Withdrawal Rate (%)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Safe Withdrawal Rate (SWR)</label>
                   <select
                     value={swr}
                     onChange={(e) => setSwr(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer"
+                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer text-slate-900 dark:text-white"
                   >
                     <option value={4.0}>4.0% Standard Rule (25x Expenses)</option>
                     <option value={3.5}>3.5% Conservative (28.5x Expenses)</option>
@@ -148,34 +157,34 @@ export default function FireInvestmentApp() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Starting Principal ($)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Starting Principal ($)</label>
                   <input
                     type="number"
                     value={initialPrincipal}
                     onChange={(e) => setInitialPrincipal(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Monthly Contribution ($)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Monthly Contribution ($)</label>
                   <input
                     type="number"
                     value={monthlyContribution}
                     onChange={(e) => setMonthlyContribution(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Time Horizon ({horizonYears} yrs)</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Time Horizon ({horizonYears} yrs)</label>
                   <input
                     type="number"
                     value={horizonYears}
                     onChange={(e) => setHorizonYears(Number(e.target.value))}
-                    className="w-full p-2.5 font-bold text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full p-2.5 font-bold font-mono text-sm bg-slate-50 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -183,18 +192,18 @@ export default function FireInvestmentApp() {
 
             {/* Target Numbers Cards */}
             {activeTab === 'FIRE' && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-2xl border border-slate-200/60 dark:border-slate-800">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">Lean FIRE Target (75%)</span>
-                  <span className="text-base font-extrabold text-slate-800 dark:text-slate-200">${fireResult.leanFireNumber.toLocaleString()}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
+                <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 space-y-1">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Lean FIRE (75%)</span>
+                  <span className="text-base font-extrabold font-mono text-slate-800 dark:text-slate-200 block">${fireResult.leanFireNumber.toLocaleString()}</span>
                 </div>
-                <div className="bg-emerald-50 dark:bg-emerald-950/50 p-3.5 rounded-2xl border border-emerald-200 dark:border-emerald-800">
-                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase block">Primary FIRE Target</span>
-                  <span className="text-base font-black text-emerald-600 dark:text-emerald-400">${fireResult.fireTargetNumber.toLocaleString()}</span>
+                <div className="bg-emerald-50 dark:bg-emerald-950/50 p-4 rounded-2xl border border-emerald-200 dark:border-emerald-800 space-y-1">
+                  <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block">Primary FIRE Target</span>
+                  <span className="text-base font-black font-mono text-emerald-600 dark:text-emerald-400 block">${fireResult.fireTargetNumber.toLocaleString()}</span>
                 </div>
-                <div className="bg-indigo-50 dark:bg-indigo-950/50 p-3.5 rounded-2xl border border-indigo-200 dark:border-indigo-800">
-                  <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase block">Fat FIRE Target (150%)</span>
-                  <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">${fireResult.fatFireNumber.toLocaleString()}</span>
+                <div className="bg-indigo-50 dark:bg-indigo-950/50 p-4 rounded-2xl border border-indigo-200 dark:border-indigo-800 space-y-1">
+                  <span className="text-[10px] font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider block">Fat FIRE (150%)</span>
+                  <span className="text-base font-extrabold font-mono text-indigo-600 dark:text-indigo-400 block">${fireResult.fatFireNumber.toLocaleString()}</span>
                 </div>
               </div>
             )}
@@ -205,44 +214,44 @@ export default function FireInvestmentApp() {
 
         {/* Right Column: Hero Outcome & Sticky Ad */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 text-white p-7 rounded-3xl shadow-xl space-y-5">
-            <span className="text-[11px] uppercase tracking-widest font-extrabold text-emerald-200 block">
-              {activeTab === 'FIRE' ? 'Time to Financial Freedom' : 'Projected Future Value (Nominal)'}
+          <div className="bg-gradient-to-br from-emerald-600 via-emerald-700 to-slate-900 text-white p-7 rounded-3xl shadow-xl shadow-emerald-700/15 space-y-5">
+            <span className="text-[11px] uppercase tracking-widest font-black text-emerald-200 block">
+              {activeTab === 'FIRE' ? 'Time to Financial Freedom' : 'Projected Future Value'}
             </span>
 
-            <div className="text-3xl sm:text-4xl font-black tracking-tight leading-none">
+            <div className="text-3xl sm:text-4xl font-black tracking-tight leading-none font-mono">
               {activeTab === 'FIRE' ? `${fireResult.yearsToFIRE} Years (Age ${fireResult.fireAge})` : `$${sipResult.futureValueNominal.toLocaleString()}`}
             </div>
 
-            <div className="pt-4 border-t border-white/20 space-y-2 text-xs">
+            <div className="pt-4 border-t border-white/20 space-y-2.5 text-xs">
               {activeTab === 'FIRE' ? (
                 <>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Current Progress:</span>
-                    <span className="font-extrabold">{fireResult.currentProgressPct}%</span>
+                    <span className="text-emerald-100 font-medium">Current Progress:</span>
+                    <span className="font-bold font-mono">{fireResult.currentProgressPct}%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Annual Savings Rate:</span>
-                    <span className="font-extrabold">${annualSavings.toLocaleString()} ({(annualIncome > 0 ? (annualSavings / annualIncome) * 100 : 0).toFixed(1)}%)</span>
+                    <span className="text-emerald-100 font-medium">Annual Savings Rate:</span>
+                    <span className="font-bold font-mono">${annualSavings.toLocaleString()} ({(annualIncome > 0 ? (annualSavings / annualIncome) * 100 : 0).toFixed(1)}%)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Monthly Passive Income:</span>
-                    <span className="font-extrabold text-emerald-200">${fireResult.monthlyPassiveIncomeAtFIRE.toLocaleString()}/mo</span>
+                    <span className="text-emerald-100 font-medium">Monthly Passive SWR:</span>
+                    <span className="font-bold font-mono text-emerald-200">${fireResult.monthlyPassiveIncomeAtFIRE.toLocaleString()}/mo</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Total Principal Invested:</span>
-                    <span className="font-extrabold">${sipResult.totalContributions.toLocaleString()}</span>
+                    <span className="text-emerald-100 font-medium">Total Invested:</span>
+                    <span className="font-bold font-mono">${sipResult.totalContributions.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Compound Interest Earned:</span>
-                    <span className="font-extrabold text-emerald-200">+${sipResult.totalInterestEarned.toLocaleString()}</span>
+                    <span className="text-emerald-100 font-medium">Interest Earned:</span>
+                    <span className="font-bold font-mono text-emerald-200">+${sipResult.totalInterestEarned.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="opacity-90">Growth Multiplier:</span>
-                    <span className="font-extrabold">{sipResult.growthMultiplier}x</span>
+                    <span className="text-emerald-100 font-medium">Growth Multiplier:</span>
+                    <span className="font-bold font-mono">{sipResult.growthMultiplier}x</span>
                   </div>
                 </>
               )}
@@ -251,6 +260,7 @@ export default function FireInvestmentApp() {
 
           <AdUnit slotType="sidebar" />
         </div>
+
       </div>
 
       <AdUnit slotType="mobile-anchor" />

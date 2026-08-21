@@ -48,51 +48,50 @@ const hreflangs = [
   hreflangs={hreflangs}
 >
   {/* Hero Header */}
-  <section class="py-8 px-4 max-w-7xl mx-auto space-y-4">
-    <div class="space-y-2">
-      <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300">
-        <span>{countryData.flagEmoji} {countryData.countryName}</span>
-        <span>•</span>
-        <span>2026 Tax Authority: {countryData.taxAuthorityName}</span>
-      </div>
-
-      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-        {countryData.countryName} <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">Salary & Income Tax Calculator 2026</span>
-      </h1>
-
-      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
-        {countryData.summaryDescription} Governed by <em>{countryData.statutoryLegislation}</em>.
-      </p>
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300 shadow-xs">
+      <span class="text-base">{countryData.flagEmoji}</span>
+      <span>{countryData.countryName}</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>{countryData.taxAuthorityName} (2026)</span>
     </div>
+
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+      {countryData.countryName} <span class="text-emerald-600 dark:text-emerald-400">Salary & Income Tax Calculator 2026</span>
+    </h1>
+
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      {countryData.summaryDescription} Governed by <em>{countryData.statutoryLegislation}</em>.
+    </p>
   </section>
 
   {/* Main Calculator React Island */}
-  <section class="max-w-7xl mx-auto px-4 pb-12">
+  <section class="max-w-7xl mx-auto px-4 pb-16">
     <GlobalTaxCalculatorApp client:load initialCountryCode={countryData.countryCode} />
   </section>
 
   {/* Popular Discrete Milestone Tiers */}
   {countryData.popularSalaryAmounts && countryData.popularSalaryAmounts.length > 0 && (
-    <section class="max-w-7xl mx-auto px-4 py-8 border-t border-slate-200 dark:border-slate-800 space-y-6">
+    <section class="max-w-7xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-6">
       <div>
-        <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
           Popular Salary Milestones in {countryData.countryName}
         </h2>
-        <p class="text-xs text-slate-400">
-          Pre-computed take-home pay and tax deduction tables for benchmark salaries.
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Pre-computed take-home pay and tax deduction tables for benchmark compensation levels.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {countryData.popularSalaryAmounts.map((amt) => (
           <a
             href={`/salary/${countryData.countryCode.toLowerCase()}/${amt}-${countryData.currencyCode.toLowerCase()}`}
-            class="p-4 bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-2xl text-center transition space-y-1 shadow-sm"
+            class="p-5 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/80 rounded-3xl text-center transition-all space-y-1.5 shadow-card-light dark:shadow-none hover:-translate-y-0.5"
           >
-            <div class="text-xs font-black font-mono text-slate-900 dark:text-white" data-financial-figure>
+            <div class="text-xs sm:text-sm font-black font-mono text-slate-900 dark:text-white" data-financial-figure>
               {countryData.currencySymbol || countryData.currencyCode} {amt.toLocaleString()}
             </div>
-            <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
+            <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold">
               View Breakdown →
             </div>
           </a>

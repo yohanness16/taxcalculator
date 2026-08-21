@@ -19,7 +19,7 @@ const mortgageFaqs = [
 ---
 
 <Layout
-  title="Mortgage Calculator & Amortization Schedule 2026 | GlobalTaxCalc"
+  title="Mortgage Calculator & Amortization Schedule 2026 | TOOLBOXS"
   description="Calculate monthly PITI mortgage payments, property taxes, PMI, and accelerated extra principal payoff schedules. Compare standard vs accelerated loan terms."
   faqs={mortgageFaqs}
   breadcrumbs={[
@@ -27,13 +27,15 @@ const mortgageFaqs = [
     { name: 'Mortgage Calculator', url: '/mortgage-calculator' },
   ]}
 >
-  <section class="py-10 md:py-12 px-4 max-w-7xl mx-auto text-center space-y-3">
-    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 px-3.5 py-1 rounded-full text-xs font-bold text-emerald-700 dark:text-emerald-300">
+  <section class="py-12 md:py-16 px-4 max-w-7xl mx-auto text-center space-y-4">
+    <div class="inline-flex items-center space-x-2 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-4 py-1.5 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300 shadow-xs">
       <span>🏡 Fixed Rate Mortgage & Early Payoff Modeling</span>
+      <span class="text-slate-300 dark:text-slate-600">•</span>
+      <span>Amortization Schedule</span>
     </div>
 
-    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto">
-      Mortgage PITI & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Amortization Schedule</span>
+    <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+      Mortgage PITI & <span class="text-emerald-600 dark:text-emerald-400">Amortization Schedule</span>
     </h1>
 
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -41,7 +43,33 @@ const mortgageFaqs = [
     </p>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 pb-14">
+  <section class="max-w-7xl mx-auto px-4 pb-16">
     <MortgageCalculatorApp client:load initialHomePrice={450000} initialDownPayment={90000} initialRate={6.5} initialYears={30} />
+  </section>
+
+  {/* FAQ Section */}
+  <section class="max-w-4xl mx-auto px-4 py-14 border-t border-slate-200/80 dark:border-slate-800/80 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+        Frequently Asked Questions about Mortgages
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+        Everything you need to know about PITI amortization and early payoff strategies.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {mortgageFaqs.map((faq) => (
+        <details class="group bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 shadow-card-light dark:shadow-none transition-all">
+          <summary class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none select-none">
+            <span>{faq.question}</span>
+            <span class="text-emerald-600 dark:text-emerald-400 group-open:rotate-180 transition-transform text-lg ml-4 flex-shrink-0">↓</span>
+          </summary>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
   </section>
 </Layout>
