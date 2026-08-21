@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toolboxs.tech/sitemap-index.xml
+Sitemap: https://toolboxs.tech/sitemap-0.xml
