@@ -40,28 +40,25 @@ Deploy your Astro 5 build to your hosting provider (e.g., **Cloudflare Pages**, 
 
 You only need to update **2 files** in this codebase:
 
-#### File A: `src/layouts/Layout.astro`
-Open [`src/layouts/Layout.astro`](file:///home/yohannes/Desktop/untitled%20folder/src/layouts/Layout.astro#L19-L21) and replace `ca-pub-0000000000000000` with your actual Publisher ID:
-
+#### File A: `src/layouts/Layout.astro` (Already configured ✅)
+Your Publisher ID is injected across every single page:
 ```astro
-// src/layouts/Layout.astro (Line 19)
-const adSenseClientId = 'ca-pub-1234567890123456'; // <-- Replace with your real Pub ID
+// src/layouts/Layout.astro
+const adSenseClientId = 'ca-pub-6768212179657827';
 ```
 
-This automatically injects the Google AdSense loader script across every single page:
 ```html
 <script
   async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456"
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6768212179657827"
   crossorigin="anonymous"
 ></script>
 ```
 
-#### File B: `public/ads.txt`
-Open [`public/ads.txt`](file:///home/yohannes/Desktop/untitled%20folder/public/ads.txt) and replace the placeholder with your Publisher ID:
-
+#### File B: `public/ads.txt` (Already configured ✅)
+Your seller verification file is ready:
 ```text
-google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+google.com, pub-6768212179657827, DIRECT, f08c47fec0942fa0
 ```
 *(When deployed, this file will be automatically accessible at `https://yourdomain.com/ads.txt`, fulfilling Google's anti-fraud seller verification requirement).*
 
