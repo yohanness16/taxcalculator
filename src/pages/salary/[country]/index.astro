@@ -1,0 +1,103 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import GlobalTaxCalculatorApp from '../../../components/GlobalTaxCalculatorApp';
+import { GLOBAL_COUNTRIES_DATA } from '../../../data/globalTaxData';
+import { GLOBAL_TAX_FAQS } from '../../../data/faqData';
+
+export async function getStaticPaths() {
+  return GLOBAL_COUNTRIES_DATA.map((c) => ({
+    params: { country: c.countryCode.toLowerCase() },
+    props: { countryData: c },
+  }));
+}
+
+const { countryData } = Astro.props;
+const faqs = GLOBAL_TAX_FAQS[countryData.countryCode] || [
+  {
+    question: `How is employment income tax calculated in ${countryData.countryName}?`,
+    answer: `${countryData.summaryDescription} The primary tax authority is ${countryData.taxAuthorityName}.`,
+  },
+  {
+    question: `What are the statutory deductions in ${countryData.countryName}?`,
+    answer: `Statutory deductions include income tax and social contributions (${countryData.socialContributions.map(s => `${s.name}: ${(s.employeeRate * 100).toFixed(1)}%`).join(', ') || 'none'}).`,
+  },
+];
+
+const pageTitle = `${countryData.countryName} Salary Calculator 2026 - Take-Home Pay & Taxes | TOOLBOXS`;
+const pageDescription = `Calculate your 2026 net take-home salary, income taxes, and pension deductions in ${countryData.countryName} (${countryData.currencyCode}). Based on ${countryData.statutoryLegislation}.`;
+const canonicalUrl = `https://toolboxs.tech/salary/${countryData.countryCode.toLowerCase()}`;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Salary Directory', url: 'https://toolboxs.tech/salary' },
+  { name: `${countryData.countryName} Salary Tax`, url: canonicalUrl },
+];
+
+const hreflangs = [
+  { lang: `en-${countryData.countryCode.toUpperCase()}`, url: canonicalUrl },
+  { lang: 'en', url: canonicalUrl },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+  hreflangs={hreflangs}
+>
+  {/* Hero Header */}
+  <section class="py-8 px-4 max-w-7xl mx-auto space-y-4">
+    <div class="space-y-2">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300">
+        <span>{countryData.flagEmoji} {countryData.countryName}</span>
+        <span>•</span>
+        <span>2026 Tax Authority: {countryData.taxAuthorityName}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+        {countryData.countryName} <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">Salary & Income Tax Calculator 2026</span>
+      </h1>
+
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
+        {countryData.summaryDescription} Governed by <em>{countryData.statutoryLegislation}</em>.
+      </p>
+    </div>
+  </section>
+
+  {/* Main Calculator React Island */}
+  <section class="max-w-7xl mx-auto px-4 pb-12">
+    <GlobalTaxCalculatorApp client:load initialCountryCode={countryData.countryCode} />
+  </section>
+
+  {/* Popular Discrete Milestone Tiers */}
+  {countryData.popularSalaryAmounts && countryData.popularSalaryAmounts.length > 0 && (
+    <section class="max-w-7xl mx-auto px-4 py-8 border-t border-slate-200 dark:border-slate-800 space-y-6">
+      <div>
+        <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">
+          Popular Salary Milestones in {countryData.countryName}
+        </h2>
+        <p class="text-xs text-slate-400">
+          Pre-computed take-home pay and tax deduction tables for benchmark salaries.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {countryData.popularSalaryAmounts.map((amt) => (
+          <a
+            href={`/salary/${countryData.countryCode.toLowerCase()}/${amt}-${countryData.currencyCode.toLowerCase()}`}
+            class="p-4 bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-2xl text-center transition space-y-1 shadow-sm"
+          >
+            <div class="text-xs font-black font-mono text-slate-900 dark:text-white" data-financial-figure>
+              {countryData.currencySymbol || countryData.currencyCode} {amt.toLocaleString()}
+            </div>
+            <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
+              View Breakdown →
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</Layout>

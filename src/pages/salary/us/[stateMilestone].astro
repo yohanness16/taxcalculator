@@ -1,0 +1,357 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import GlobalTaxCalculatorApp from '../../../components/GlobalTaxCalculatorApp';
+import { US_STATES_TAX_DATA } from '../../../data/usStatesTaxData';
+import { calculateUS1099Tax } from '../../../engines/us1099TaxEngine';
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  const stateKeys = Object.keys(US_STATES_TAX_DATA);
+  const benchmarkSalaries = [45000, 60000, 75000, 85000, 100000, 120000, 150000, 200000, 300000];
+
+  // Specific state high-volume search targets
+  const prioritizedStates = ['TX', 'CA', 'NY', 'FL', 'WA', 'IL', 'NC', 'GA', 'PA', 'OH', 'CO', 'NJ', 'VA', 'AZ', 'MA'];
+
+  for (const stateCode of prioritizedStates) {
+    const state = US_STATES_TAX_DATA[stateCode];
+    if (!state) continue;
+
+    const stateSlug = state.stateName.toLowerCase().replace(/\s+/g, '-');
+
+    benchmarkSalaries.forEach((amt) => {
+      paths.push({
+        params: {
+          stateMilestone: `${amt}-in-${stateSlug}`,
+        },
+        props: {
+          state,
+          salaryAmount: amt,
+          benchmarkSalaries,
+        },
+      });
+    });
+  }
+
+  return paths;
+}
+
+const { state, salaryAmount, benchmarkSalaries } = Astro.props;
+
+// Calculate US Federal + State + FICA Tax
+const calculateUSSalary = (gross: number, stateData: typeof state) => {
+  // 1. Federal Standard Deduction 2026 ($15,000 for Single)
+  const federalStandardDeduction = 15000;
+  const taxableFederal = Math.max(0, gross - federalStandardDeduction);
+
+  // 2026 Federal Brackets
+  const federalBrackets = [
+    { min: 0, max: 11925, rate: 0.10 },
+    { min: 11925, max: 48475, rate: 0.12 },
+    { min: 48475, max: 103350, rate: 0.22 },
+    { min: 103350, max: 197300, rate: 0.24 },
+    { min: 197300, max: 250525, rate: 0.32 },
+    { min: 250525, max: 626350, rate: 0.35 },
+    { min: 626350, max: Infinity, rate: 0.37 },
+  ];
+
+  let federalTax = 0;
+  for (const b of federalBrackets) {
+    if (taxableFederal > b.min) {
+      const taxableInBracket = Math.min(taxableFederal - b.min, b.max - b.min);
+      federalTax += taxableInBracket * b.rate;
+    }
+  }
+
+  // 2. FICA Taxes (Employee W2: 6.2% OASDI up to $176,100 + 1.45% Medicare)
+  const socialSecurityCap = 176100;
+  const socialSecurity = Math.min(gross, socialSecurityCap) * 0.062;
+  const medicare = (gross * 0.0145) + (gross > 200000 ? (gross - 200000) * 0.009 : 0);
+  const totalFICA = socialSecurity + medicare;
+
+  // 3. State Income Tax
+  let stateTax = 0;
+  if (stateData.taxType === 'FLAT' && stateData.flatRate) {
+    const taxableState = Math.max(0, gross - (stateData.standardDeduction?.single || 0));
+    stateTax = taxableState * stateData.flatRate;
+  } else if (stateData.taxType === 'PROGRESSIVE' && stateData.brackets?.single) {
+    const taxableState = Math.max(0, gross - (stateData.standardDeduction?.single || 0));
+    for (const b of stateData.brackets.single) {
+      if (taxableState > b.min) {
+        const taxableInBracket = Math.min(taxableState - b.min, b.max - b.min);
+        stateTax += taxableInBracket * b.rate;
+      }
+    }
+  }
+
+  const totalDeductions = federalTax + totalFICA + stateTax;
+  const netTakeHome = Math.max(0, gross - totalDeductions);
+  const effectiveTaxRate = ((totalDeductions / gross) * 100).toFixed(1);
+  const netKeepRatio = ((netTakeHome / gross) * 100).toFixed(1);
+
+  return {
+    gross,
+    federalTax,
+    totalFICA,
+    socialSecurity,
+    medicare,
+    stateTax,
+    totalDeductions,
+    netTakeHome,
+    netMonthly: netTakeHome / 12,
+    netBiWeekly: netTakeHome / 26,
+    netWeekly: netTakeHome / 52,
+    effectiveTaxRate,
+    netKeepRatio,
+  };
+};
+
+const result = calculateUSSalary(salaryAmount, state);
+const stateSlug = state.stateName.toLowerCase().replace(/\s+/g, '-');
+const formattedGross = `$${salaryAmount.toLocaleString()}`;
+const formattedNetAnnual = `$${Math.round(result.netTakeHome).toLocaleString()}`;
+const formattedNetMonthly = `$${Math.round(result.netMonthly).toLocaleString()}`;
+const formattedFederal = `$${Math.round(result.federalTax).toLocaleString()}`;
+const formattedFICA = `$${Math.round(result.totalFICA).toLocaleString()}`;
+const formattedStateTax = `$${Math.round(result.stateTax).toLocaleString()}`;
+
+const pageTitle = `${formattedGross} Salary After Tax in ${state.stateName} (2026 Take-Home Pay) | TOOLBOXS`;
+const pageDescription = `On an ${formattedGross} gross salary in ${state.stateName}, your estimated net take-home pay is ${formattedNetAnnual} (${formattedNetMonthly}/month). Pays ${formattedFederal} Federal Tax, ${formattedFICA} FICA, and ${formattedStateTax} ${state.stateName} State Tax.`;
+
+const canonicalUrl = `https://toolboxs.tech/salary/us/${salaryAmount}-in-${stateSlug}`;
+
+const dynamicFaqs = [
+  {
+    question: `What is the net take-home pay on an ${formattedGross} salary in ${state.stateName}?`,
+    answer: `On an ${formattedGross} gross annual salary in ${state.stateName}, an individual filing Single retains an estimated ${formattedNetAnnual} per year (${formattedNetMonthly} per month, or $${Math.round(result.netWeekly).toLocaleString()} per week) after deducting ${formattedFederal} in Federal Income Tax, ${formattedFICA} in FICA (Social Security & Medicare), and ${formattedStateTax} in ${state.stateName} state income tax.`,
+  },
+  {
+    question: `How much state income tax do I pay on ${formattedGross} in ${state.stateName}?`,
+    answer: state.taxType === 'NONE'
+      ? `${state.stateName} has zero (0%) state individual income tax. You pay $0 in state income taxes on your ${formattedGross} salary.`
+      : `In ${state.stateName}, personal state income tax on an ${formattedGross} salary is estimated at ${formattedStateTax} based on 2026 state statutory tax brackets.`,
+  },
+  {
+    question: `What is the total effective tax rate on ${formattedGross} in ${state.stateName}?`,
+    answer: `The total combined effective tax rate (Federal + FICA + ${state.stateName} State Tax) on ${formattedGross} is ${result.effectiveTaxRate}%. You retain ${result.netKeepRatio}% of your total earnings.`,
+  },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Salary Directory', url: 'https://toolboxs.tech/salary' },
+  { name: 'United States', url: 'https://toolboxs.tech/salary/us' },
+  { name: `${formattedGross} in ${state.stateName}`, url: canonicalUrl },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  faqs={dynamicFaqs}
+  breadcrumbs={breadcrumbs}
+>
+  {/* Header Breadcrumbs */}
+  <section class="py-8 px-4 max-w-7xl mx-auto space-y-4">
+    <nav class="flex items-center space-x-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+      <a href="/" class="hover:text-emerald-500">Home</a>
+      <span>/</span>
+      <a href="/salary" class="hover:text-emerald-500">Salary</a>
+      <span>/</span>
+      <a href="/salary/us" class="hover:text-emerald-500">🇺🇸 United States</a>
+      <span>/</span>
+      <span class="text-emerald-600 dark:text-emerald-400 font-bold">{state.stateName}</span>
+    </nav>
+
+    <div class="space-y-2">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-300">
+        <span>🇺🇸 {state.stateName} Payroll</span>
+        <span>•</span>
+        <span>2026 IRS & State Tax Matrix</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">{formattedGross}</span> Salary After Tax in {state.stateName}
+      </h1>
+
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
+        Complete pre-computed 2026 paycheck analysis for a single filer earning <strong>{formattedGross}</strong> in {state.stateName}. Breaks down federal withholding, FICA payroll levies, and state income tax liabilities.
+      </p>
+    </div>
+  </section>
+
+  {/* Pre-Computed Hero Cards (Instant Indexation for Googlebot) */}
+  <section class="max-w-7xl mx-auto px-4 pb-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <div class="p-5 bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Gross Annual Salary</span>
+        <div class="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-white" data-financial-figure>
+          {formattedGross}
+        </div>
+        <p class="text-[10px] text-slate-400">Pre-tax annual baseline</p>
+      </div>
+
+      <div class="p-5 bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-2xl shadow-lg space-y-1">
+        <span class="text-[11px] font-bold text-emerald-200 uppercase tracking-wider">Net Monthly Take-Home</span>
+        <div class="text-xl sm:text-2xl font-black font-mono" data-financial-figure>
+          {formattedNetMonthly}
+        </div>
+        <p class="text-[10px] text-emerald-100">{formattedNetAnnual} / year</p>
+      </div>
+
+      <div class="p-5 bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{state.stateName} State Tax</span>
+        <div class="text-xl sm:text-2xl font-black font-mono text-rose-500" data-financial-figure>
+          {state.taxType === 'NONE' ? '$0 (0%)' : `- ${formattedStateTax}`}
+        </div>
+        <p class="text-[10px] text-slate-400">{state.taxType === 'NONE' ? 'No state income tax' : 'State assessed levy'}</p>
+      </div>
+
+      <div class="p-5 bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm space-y-1">
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Net Retention Ratio</span>
+        <div class="text-xl sm:text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400" data-financial-figure>
+          {result.netKeepRatio}%
+        </div>
+        <p class="text-[10px] text-slate-400">Combined effective tax: {result.effectiveTaxRate}%</p>
+      </div>
+
+    </div>
+  </section>
+
+  {/* Interactive Calculator React Island */}
+  <section class="max-w-7xl mx-auto px-4 pb-12">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">
+          Interactive US & Global Paycheck Simulator
+        </h2>
+        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+          Pre-loaded with {formattedGross}
+        </span>
+      </div>
+
+      <GlobalTaxCalculatorApp
+        client:load
+        initialCountryCode="US"
+        initialSalary={salaryAmount}
+      />
+    </div>
+  </section>
+
+  {/* Pre-Computed Paycheck Schedule Table */}
+  <section class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+    <div class="space-y-2">
+      <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">
+        Detailed 2026 {state.stateName} Paycheck Conversion Schedule
+      </h2>
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Itemized federal withholding, FICA contributions, and {state.stateName} state deductions for {formattedGross}.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm p-6">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase">
+            <th class="pb-3">Line Item</th>
+            <th class="pb-3">Annual (Yearly)</th>
+            <th class="pb-3">Monthly</th>
+            <th class="pb-3">Bi-Weekly</th>
+            <th class="pb-3 text-right">Weekly</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 dark:divide-slate-800 font-mono" data-financial-figure>
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+            <td class="py-3 font-sans font-bold text-slate-800 dark:text-slate-200">Gross Salary Earnings</td>
+            <td class="py-3 font-bold">{formattedGross}</td>
+            <td class="py-3">${Math.round(salaryAmount / 12).toLocaleString()}</td>
+            <td class="py-3">${Math.round(salaryAmount / 26).toLocaleString()}</td>
+            <td class="py-3 text-right">${Math.round(salaryAmount / 52).toLocaleString()}</td>
+          </tr>
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+            <td class="py-3 font-sans font-bold text-slate-800 dark:text-slate-200">Federal Income Tax (IRS)</td>
+            <td class="py-3 text-rose-500">- {formattedFederal}</td>
+            <td class="py-3 text-rose-500">- ${Math.round(result.federalTax / 12).toLocaleString()}</td>
+            <td class="py-3 text-rose-500">- ${Math.round(result.federalTax / 26).toLocaleString()}</td>
+            <td class="py-3 text-right text-rose-500">- ${Math.round(result.federalTax / 52).toLocaleString()}</td>
+          </tr>
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+            <td class="py-3 font-sans font-bold text-slate-800 dark:text-slate-200">FICA (Social Security & Med)</td>
+            <td class="py-3 text-amber-500">- {formattedFICA}</td>
+            <td class="py-3 text-amber-500">- ${Math.round(result.totalFICA / 12).toLocaleString()}</td>
+            <td class="py-3 text-amber-500">- ${Math.round(result.totalFICA / 26).toLocaleString()}</td>
+            <td class="py-3 text-right text-amber-500">- ${Math.round(result.totalFICA / 52).toLocaleString()}</td>
+          </tr>
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+            <td class="py-3 font-sans font-bold text-slate-800 dark:text-slate-200">{state.stateName} State Tax</td>
+            <td class="py-3 text-rose-500">{state.taxType === 'NONE' ? '$0' : `- ${formattedStateTax}`}</td>
+            <td class="py-3 text-rose-500">{state.taxType === 'NONE' ? '$0' : `- $${Math.round(result.stateTax / 12).toLocaleString()}`}</td>
+            <td class="py-3 text-rose-500">{state.taxType === 'NONE' ? '$0' : `- $${Math.round(result.stateTax / 26).toLocaleString()}`}</td>
+            <td class="py-3 text-right text-rose-500">{state.taxType === 'NONE' ? '$0' : `- $${Math.round(result.stateTax / 52).toLocaleString()}`}</td>
+          </tr>
+          <tr class="bg-emerald-50/50 dark:bg-emerald-950/20 border-t-2 border-emerald-500">
+            <td class="py-4 font-sans font-extrabold text-emerald-800 dark:text-emerald-300">NET TAKE-HOME PAY</td>
+            <td class="py-4 font-extrabold text-emerald-600 dark:text-emerald-400">{formattedNetAnnual}</td>
+            <td class="py-4 font-extrabold text-emerald-600 dark:text-emerald-400">{formattedNetMonthly}</td>
+            <td class="py-4 font-extrabold text-emerald-600 dark:text-emerald-400">${Math.round(result.netBiWeekly).toLocaleString()}</td>
+            <td class="py-4 text-right font-extrabold text-emerald-600 dark:text-emerald-400">${Math.round(result.netWeekly).toLocaleString()}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {/* Other Benchmark Salaries in State */}
+  <section class="max-w-7xl mx-auto px-4 py-8 border-t border-slate-200 dark:border-slate-800 space-y-6">
+    <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">
+      Compare Other Salaries in {state.stateName}
+    </h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      {benchmarkSalaries.map((amt) => (
+        <a
+          href={`/salary/us/${amt}-in-${stateSlug}`}
+          class={`p-3.5 rounded-2xl border text-center transition flex flex-col justify-between ${
+            amt === salaryAmount
+              ? 'bg-emerald-500 text-white border-emerald-500 shadow-md font-bold'
+              : 'bg-white dark:bg-[#0F1626] border-slate-200 dark:border-slate-800 hover:border-emerald-500 text-slate-700 dark:text-slate-300'
+          }`}
+        >
+          <span class="text-xs font-extrabold font-mono" data-financial-figure>
+            ${amt.toLocaleString()}
+          </span>
+          <span class="text-[10px] opacity-75 mt-1">
+            {amt === salaryAmount ? 'Current View' : 'Calculate →'}
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* Dynamic FAQs */}
+  <section class="max-w-4xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 space-y-6">
+    <div class="text-center space-y-1">
+      <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+        Frequently Asked Questions for {formattedGross} in {state.stateName}
+      </h2>
+      <p class="text-xs text-slate-400">
+        Official statutory calculations for 2026 US tax year.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      {dynamicFaqs.map((faq) => (
+        <details class="group bg-white dark:bg-[#0F1626] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+          <summary class="font-bold text-sm text-slate-900 dark:text-slate-100 cursor-pointer flex justify-between items-center list-none">
+            <span>{faq.question}</span>
+            <span class="text-emerald-500 group-open:rotate-180 transition-transform">↓</span>
+          </summary>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/60">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </section>
+</Layout>
