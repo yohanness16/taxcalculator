@@ -76,10 +76,9 @@ Google AdSense gives you two ways to display ads:
 5. Click **Apply to site**. Google AI will automatically optimize and render high-paying ads across the site.
 
 #### Option 2: Custom Ad Units (For Exact Layout Control)
-If you want to manually configure each banner:
-1. Go to **Ads > By ad unit**.
-2. Create responsive **Display ad units** (e.g., small ads `5386318888`).
-3. In [`src/components/AdUnit.tsx`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdUnit.tsx) and [`src/components/AdSenseAd.astro`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdSenseAd.astro), slot ID `5386318888` is configured across all responsive ad containers.
+Configured ad units:
+1. **Display Ad Unit (`small ads`)**: Slot ID `5386318888` in [`src/components/AdUnit.tsx`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdUnit.tsx) and [`src/components/AdSenseAd.astro`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdSenseAd.astro).
+2. **Native In-Feed Ad Unit**: Slot ID `1208717370` with Layout Key `-eb+6l-2v-aq+u1` in [`src/components/AdSenseFeedAd.astro`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdSenseFeedAd.astro) and [`src/components/AdUnit.tsx`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdUnit.tsx) (placed in feeds with variable container height).
 
 ---
 

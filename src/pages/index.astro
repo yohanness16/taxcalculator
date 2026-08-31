@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import GlobalTaxCalculatorApp from '../components/GlobalTaxCalculatorApp';
+import AdSenseFeedAd from '../components/AdSenseFeedAd.astro';
 import { GLOBAL_COUNTRIES_DATA } from '../data/globalTaxData';
 
 const featuredCountries = GLOBAL_COUNTRIES_DATA.slice(0, 12);
@@ -147,6 +148,11 @@ const generalFaqs = [
         </span>
       </a>
 
+    </div>
+
+    {/* Native In-Feed AdSense Banner */}
+    <div class="pt-6">
+      <AdSenseFeedAd />
     </div>
   </section>
 

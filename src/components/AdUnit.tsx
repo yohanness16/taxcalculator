@@ -92,20 +92,20 @@ export default function AdUnit({ slotType = 'leaderboard', slotId = '5386318888'
       return (
         <div
           ref={containerRef}
-          className={`ad-slot-rectangle bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-5 flex flex-col justify-center items-center text-center shadow-card-light dark:shadow-none ${className}`}
-          style={{ minHeight: '250px', contain: 'layout size' }}
+          className={`ad-slot-in-feed bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-4 shadow-card-light dark:shadow-none overflow-hidden ${className}`}
         >
-          <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-2">
-            Advertisement
-          </span>
-          <div className="w-full flex justify-center">
+          <div className="flex items-center justify-between text-[10px] font-mono font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest pb-2 mb-2 border-b border-slate-100 dark:border-slate-800/60">
+            <span>Sponsored Feed Content</span>
+            <span>Advertisement</span>
+          </div>
+          <div className="w-full">
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%', maxWidth: '336px', minHeight: '250px' }}
+              style={{ display: 'block' }}
               data-ad-client="ca-pub-6768212179657827"
-              data-ad-slot={slotId}
-              data-ad-format="auto"
-              data-full-width-responsive="true"
+              data-ad-slot={slotId === '5386318888' ? '1208717370' : slotId}
+              data-ad-format="fluid"
+              data-ad-layout-key="-eb+6l-2v-aq+u1"
             />
           </div>
         </div>

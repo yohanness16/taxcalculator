@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import AdSenseAd from '../../components/AdSenseAd.astro';
+import AdSenseFeedAd from '../../components/AdSenseFeedAd.astro';
 import { GLOBAL_COUNTRIES_DATA } from '../../data/globalTaxData';
 
 // Strict alphabetical sort (A to Z)
@@ -36,38 +37,45 @@ const countries = [...GLOBAL_COUNTRIES_DATA].sort((a, b) =>
 
   <section class="max-w-7xl mx-auto px-4 pb-20">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {countries.map((c) => (
-        <a
-          href={`/tax-brackets/${c.countryCode.toLowerCase()}`}
-          class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 flex flex-col justify-between hover:-translate-y-0.5"
-        >
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2.5">
-                <span class="text-2xl">{c.flagEmoji}</span>
-                <h3 class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                  {c.countryName}
-                </h3>
+      {countries.map((c, index) => (
+        <>
+          <a
+            href={`/tax-brackets/${c.countryCode.toLowerCase()}`}
+            class="group p-7 bg-white dark:bg-[#0F172A] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl shadow-card-light dark:shadow-none hover:shadow-card-hover hover:border-emerald-500/80 transition-all space-y-4 flex flex-col justify-between hover:-translate-y-0.5"
+          >
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-2xl">{c.flagEmoji}</span>
+                  <h3 class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    {c.countryName}
+                  </h3>
+                </div>
+                <span class="text-[11px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
+                  {c.taxSystem}
+                </span>
               </div>
-              <span class="text-[11px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg border border-slate-200/60 dark:border-slate-700/60">
-                {c.taxSystem}
-              </span>
+
+              <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                {c.summaryDescription}
+              </p>
+
+              <div class="text-[11px] text-slate-400 pt-1">
+                Legislation: <strong class="text-slate-700 dark:text-slate-300">{c.statutoryLegislation}</strong>
+              </div>
             </div>
 
-            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
-              {c.summaryDescription}
-            </p>
-
-            <div class="text-[11px] text-slate-400 pt-1">
-              Legislation: <strong class="text-slate-700 dark:text-slate-300">{c.statutoryLegislation}</strong>
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
+              <span class="text-slate-400 font-medium text-[11px]">{c.brackets.length} Tax Brackets</span>
+              <span class="font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform">View Tax Guide →</span>
             </div>
-          </div>
-
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
-            <span class="text-slate-400 font-medium text-[11px]">{c.brackets.length} Tax Brackets</span>
-            <span class="font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform">View Tax Guide →</span>
-          </div>
-        </a>
+          </a>
+          {index === 5 && (
+            <div class="col-span-full">
+              <AdSenseFeedAd />
+            </div>
+          )}
+        </>
       ))}
     </div>
   </section>
