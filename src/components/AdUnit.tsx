@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-export default function AdUnit({ slotType, slotId = '1234567890', className = '' }: AdUnitProps) {
+export default function AdUnit({ slotType = 'leaderboard', slotId = '5386318888', className = '' }: AdUnitProps) {
   const [isDismissed, setIsDismissed] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const adPushedRef = useRef(false);
@@ -43,14 +43,14 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
         >
           <div className="flex items-center justify-between w-full px-3 py-1 text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800/60">
             <span>Advertisement</span>
-            <span>728x90 Leaderboard</span>
+            <span>small ads</span>
           </div>
 
           {/* Actual Google AdSense Responsive Display Unit */}
           <div className="w-full flex justify-center py-1">
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%', maxWidth: '728px', height: '90px' }}
+              style={{ display: 'block', width: '100%', maxWidth: '728px', minHeight: '90px' }}
               data-ad-client="ca-pub-6768212179657827"
               data-ad-slot={slotId}
               data-ad-format="auto"
@@ -70,7 +70,7 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80 text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400">
             <span>Sponsored Partner</span>
             <span className="bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full text-[9px]">
-              300x600 Display
+              Display Ad
             </span>
           </div>
 
@@ -78,10 +78,11 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
           <div className="my-auto flex justify-center py-2">
             <ins
               className="adsbygoogle"
-              style={{ display: 'inline-block', width: '300px', height: '600px' }}
+              style={{ display: 'block', width: '100%', minWidth: '250px', minHeight: '250px' }}
               data-ad-client="ca-pub-6768212179657827"
               data-ad-slot={slotId}
               data-ad-format="auto"
+              data-full-width-responsive="true"
             />
           </div>
         </div>
@@ -95,15 +96,16 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
           style={{ minHeight: '250px', contain: 'layout size' }}
         >
           <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-2">
-            Advertisement (300x250)
+            Advertisement
           </span>
           <div className="w-full flex justify-center">
             <ins
               className="adsbygoogle"
-              style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              style={{ display: 'block', width: '100%', maxWidth: '336px', minHeight: '250px' }}
               data-ad-client="ca-pub-6768212179657827"
               data-ad-slot={slotId}
-              data-ad-format="rectangle"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
             />
           </div>
         </div>
@@ -121,7 +123,7 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
               Ad
             </span>
             <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[180px]">
-              Sponsored Partner Inventory
+              Sponsored Partner
             </span>
           </div>
 
@@ -131,6 +133,8 @@ export default function AdUnit({ slotType, slotId = '1234567890', className = ''
               style={{ display: 'inline-block', width: '320px', height: '50px' }}
               data-ad-client="ca-pub-6768212179657827"
               data-ad-slot={slotId}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
             />
             <button
               onClick={() => setIsDismissed(true)}

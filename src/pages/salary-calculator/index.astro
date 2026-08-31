@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import AdSenseAd from '../../components/AdSenseAd.astro';
 import { GLOBAL_COUNTRIES_DATA } from '../../data/globalTaxData';
 
 // Alphabetically sorted master country list
@@ -39,6 +40,8 @@ const countriesByRegion = regions.map((region) => ({
     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
       Select a country below in alphabetical order to launch the dedicated payroll and income tax calculator preconfigured with statutory brackets, currency codes, and social security rules.
     </p>
+
+    <AdSenseAd />
   </section>
 
   <section class="max-w-7xl mx-auto px-4 pb-20 space-y-14">

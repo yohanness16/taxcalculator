@@ -78,9 +78,8 @@ Google AdSense gives you two ways to display ads:
 #### Option 2: Custom Ad Units (For Exact Layout Control)
 If you want to manually configure each banner:
 1. Go to **Ads > By ad unit**.
-2. Create responsive **Display ad units** (e.g., Top Leaderboard, Sidebar Rectangle).
-3. Copy the generated `data-ad-slot` number (e.g., `8947291048`).
-4. In [`src/components/AdUnit.tsx`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdUnit.tsx), paste your `data-ad-slot` into the corresponding slot container.
+2. Create responsive **Display ad units** (e.g., small ads `5386318888`).
+3. In [`src/components/AdUnit.tsx`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdUnit.tsx) and [`src/components/AdSenseAd.astro`](file:///home/yohannes/Desktop/untitled%20folder/src/components/AdSenseAd.astro), slot ID `5386318888` is configured across all responsive ad containers.
 
 ---
 
